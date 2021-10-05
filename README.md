@@ -1,6 +1,6 @@
-# INFOB318-template
+# INFOB318
 
-Informations relatives au votre projet:
+Informations relatives au projet:
 
 - Acronyme: ESLintME
 - Titre: ESLintME
