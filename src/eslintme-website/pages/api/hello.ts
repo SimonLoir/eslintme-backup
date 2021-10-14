@@ -1,14 +1,26 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import Extractor from '@core/Extractor';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Core from '@core/Core';
+
 type Data = {
     name: string;
 };
 
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<any>
 ) {
-    const core = new Core();
-    res.status(200).json({ name: 'John Doe' });
+    const ext = new Extractor();
+    const ast = ext.parse(
+        'test',
+        `
+function test(){
+    console.log('Hello world');
+}
+
+
+test()
+    `
+    );
+    res.status(200).json(ast);
 }
