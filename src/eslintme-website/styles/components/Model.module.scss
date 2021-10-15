@@ -1,0 +1,11 @@
+@import '../config';
+.model {
+    border: 1px solid $blue;
+    border-radius: $padding;
+    padding: $padding;
+    color: white;
+    cursor: pointer;
+    h2 {
+        color: $blue;
+    }
+}

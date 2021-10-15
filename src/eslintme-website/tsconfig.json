@@ -15,7 +15,9 @@
         "jsx": "preserve",
         "baseUrl": ".",
         "paths": {
-            "@core/*": ["lib/eslintme-core/src/*"]
+            "@core/*": ["lib/eslintme-core/src/*"],
+            "@style/*": ["styles/components/*"],
+            "@components/*": ["components/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

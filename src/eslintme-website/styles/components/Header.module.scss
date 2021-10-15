@@ -1,0 +1,22 @@
+@import '../config';
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    line-height: $header-height;
+    padding-left: $padding;
+    padding-right: $padding;
+    border-bottom: 1px solid rgb(45, 45, 45);
+
+    h1,
+    nav {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    nav {
+        float: right;
+    }
+}
