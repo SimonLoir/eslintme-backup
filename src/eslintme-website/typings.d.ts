@@ -9,3 +9,9 @@ declare module '*.worker.ts' {
     // export = WebpackWorker;
     export default WebpackWorker;
 }
+declare interface FileStoreFile {
+    name: string;
+    content: string;
+    processed: boolean;
+}
+declare type FileStore = FileStoreFile[];

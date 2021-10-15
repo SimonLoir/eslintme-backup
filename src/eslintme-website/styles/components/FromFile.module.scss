@@ -1,2 +1,13 @@
+@import '../config';
 .grid {
+    position: absolute;
+    top: $padding;
+    left: $padding;
+    right: $padding;
+    bottom: $padding;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    > div {
+        overflow: auto;
+    }
 }
