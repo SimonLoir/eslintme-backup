@@ -11,7 +11,7 @@ export default function handler(
     res: NextApiResponse<any>
 ) {
     const ext = new Extractor();
-    const ast = ext.parse(
+    const ast = ext.process(
         'test',
         `
 function test(){
