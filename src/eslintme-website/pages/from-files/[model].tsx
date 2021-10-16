@@ -17,7 +17,7 @@ export default function FromFilesPage() {
 
         worker.current.addEventListener(
             'message',
-            ({ data: { type, name, file, outputType } }) => {
+            ({ data: { type, name, file, outputType, error } }) => {
                 switch (type) {
                     case 'processed':
                         setFiles((files) =>
@@ -36,11 +36,12 @@ export default function FromFilesPage() {
                                     : { ...file, failed: true }
                             )
                         );
+                        console.log(error);
                         break;
 
                     case 'output-file-ready':
                         setOutputFileContent(file);
-                        setOutputFileType(outputFileType);
+                        setOutputFileType(outputType);
                         break;
                 }
             }
@@ -67,13 +68,15 @@ export default function FromFilesPage() {
                 <div>
                     <h2>Control Panel</h2>
                     <button onClick={buildFile}>Build file</button>
+                    <br />
+                    <br />
                     <h2>Extract rules from files</h2>
                     <FileManager onNewFile={newFile} />
                     <table style={{ width: '100%' }}>
                         <tbody>
-                            {filesInQueue.map((file) => (
+                            {filesInQueue.sort().map((file) => (
                                 <tr key={file.name}>
-                                    <td>{file.name} </td>
+                                    <td>{file.name.split('#')[0]} </td>
                                     <td>
                                         {file.processed ? (
                                             'Processed'

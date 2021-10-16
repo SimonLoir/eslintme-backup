@@ -9,5 +9,8 @@
     grid-template-columns: repeat(2, 1fr);
     > div {
         overflow: auto;
+        h2 {
+            margin-bottom: 25px;
+        }
     }
 }

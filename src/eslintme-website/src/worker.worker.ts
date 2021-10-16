@@ -16,7 +16,7 @@ worker.addEventListener(
                 worker.postMessage({ type: 'processed', name });
             } catch (error) {
                 // We inform the renderer thread that the file was not processed properly
-                worker.postMessage({ type: 'processing-error', name });
+                worker.postMessage({ type: 'processing-error', name, error });
             }
         } else if (type == 'build-file') {
             // We generate the output file based on its type
