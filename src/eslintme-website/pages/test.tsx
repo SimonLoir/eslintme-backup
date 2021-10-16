@@ -1,11 +1,14 @@
-import FuncCallSpacing from '@core/rules/FuncCallSpacing';
+import FuncCallSpacingRule from '@core/rules/FuncCallSpacing';
 import { useEffect } from 'react';
 import * as espree from 'espree';
 
 export default function TestPage() {
     useEffect(() => {
-        const fcs = new FuncCallSpacing();
-        const content = `console.log ("test")`;
+        const fcs = new FuncCallSpacingRule();
+        const content = `function test(){
+
+        }
+        test ();`;
         const program = espree.parse(content, {
             range: true,
             loc: true,
@@ -14,10 +17,14 @@ export default function TestPage() {
         });
 
         program.tokens.forEach((token, id) => {
-            console.log(token);
+            if (token.type == 'Punctuator') {
+                if (token.value == '(') {
+                    fcs.testForToken('a.js', program, content, id);
+                }
+            }
         });
 
-        console.log(program);
+        console.log(fcs.extract());
     }, []);
     return <></>;
 }

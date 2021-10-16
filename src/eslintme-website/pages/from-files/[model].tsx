@@ -62,6 +62,8 @@ export default function FromFilesPage() {
     const buildFile = () =>
         worker.current?.postMessage({ type: 'build-file', outputType: 'json' });
 
+    const processing = filesInQueue.filter((f) => !f.failed && !f.processed);
+
     return (
         <>
             <div className={style.grid}>
@@ -72,6 +74,13 @@ export default function FromFilesPage() {
                     <br />
                     <h2>Extract rules from files</h2>
                     <FileManager onNewFile={newFile} />
+
+                    {processing.length > 0 ? (
+                        <p>Some files are still being processed</p>
+                    ) : (
+                        ''
+                    )}
+
                     <table style={{ width: '100%' }}>
                         <tbody>
                             {filesInQueue.sort().map((file) => (
