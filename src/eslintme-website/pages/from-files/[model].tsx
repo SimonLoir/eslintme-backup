@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import style from '@style/FromFile.module.scss';
 import Editor from '@monaco-editor/react';
 import FileManager from '@components/FileManager';
@@ -41,9 +41,6 @@ export default function FromFilesPage() {
                     case 'output-file-ready':
                         setOutputFileContent(file);
                         setOutputFileType(outputFileType);
-                        break;
-
-                    default:
                         break;
                 }
             }
