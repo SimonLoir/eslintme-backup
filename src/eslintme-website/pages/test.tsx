@@ -1,14 +1,22 @@
-import FuncCallSpacingRule from '@core/rules/FuncCallSpacing';
 import { useEffect } from 'react';
 import * as espree from 'espree';
+import DotLocationRule from '@core/rules/DotLocationRule';
 
 export default function TestPage() {
     useEffect(() => {
-        const fcs = new FuncCallSpacingRule();
-        const content = `function test(){
+        const cs = new DotLocationRule();
+        const content = `hello.world()
+        hello.
+        world()
+        
+        hello
+        .world()
 
-        }
-        test ();`;
+        test
+        .
+        test()
+        
+        const a = [...test]`;
         const program = espree.parse(content, {
             range: true,
             loc: true,
@@ -18,13 +26,13 @@ export default function TestPage() {
 
         program.tokens.forEach((token, id) => {
             if (token.type == 'Punctuator') {
-                if (token.value == '(') {
-                    fcs.testForToken('a.js', program, content, id);
+                if (token.value == '.') {
+                    cs.testForToken('a.js', program, content, id);
                 }
             }
         });
 
-        console.log(fcs.extract());
+        console.log(cs.extract());
     }, []);
     return <></>;
 }
