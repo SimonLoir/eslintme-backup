@@ -1,22 +1,25 @@
 import { useEffect } from 'react';
 import * as espree from 'espree';
-import DotLocationRule from '@core/rules/DotLocationRule';
+import IndentRule from '@core/rules/Indent';
 
 export default function TestPage() {
     useEffect(() => {
-        const cs = new DotLocationRule();
-        const content = `hello.world()
-        hello.
-        world()
-        
-        hello
-        .world()
+        const rule = new IndentRule();
+        const content = `console.log("coucou")
+function test(){
+    console.log('Hello world')
+    const test = () => {
+       console.log("hello world");
+       //test
 
-        test
-        .
-        test()
-        
-        const a = [...test]`;
+       /*
+       *
+       * test
+       * hello world
+       */
+    }
+}`;
+
         const program = espree.parse(content, {
             range: true,
             loc: true,
@@ -24,15 +27,9 @@ export default function TestPage() {
             ecmaVersion: 'latest',
         });
 
-        program.tokens.forEach((token, id) => {
-            if (token.type == 'Punctuator') {
-                if (token.value == '.') {
-                    cs.testForToken('a.js', program, content, id);
-                }
-            }
-        });
+        rule.testFile('a.js', program, content);
 
-        console.log(cs.extract());
+        console.log(rule.extract());
     }, []);
     return <></>;
 }
