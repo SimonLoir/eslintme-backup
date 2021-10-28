@@ -86,7 +86,7 @@ export default function FromFilesPage() {
                             {filesInQueue.sort().map((file) => (
                                 <tr key={file.name}>
                                     <td>{file.name.split('#')[0]} </td>
-                                    <td>
+                                    <td style={{ textAlign: 'right' }}>
                                         {file.processed ? (
                                             'Processed'
                                         ) : file.failed ? (
