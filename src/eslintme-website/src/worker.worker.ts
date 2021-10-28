@@ -5,6 +5,11 @@ import Core from '@core/Core';
 const worker: Worker = self as unknown as Worker;
 const core = new Core();
 const extractor = core.rules;
+
+extractor.onProgress((currentTask, totalTasks, name, ratio) => {
+    worker.postMessage({ type: 'progress', name, ratio });
+});
+
 worker.addEventListener(
     'message',
     ({ data: { name, content, type, outputType } }) => {

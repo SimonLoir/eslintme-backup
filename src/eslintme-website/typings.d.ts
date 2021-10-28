@@ -14,5 +14,6 @@ declare interface FileStoreFile {
     content: string;
     processed: boolean;
     failed?: boolean;
+    ratio: number;
 }
 declare type FileStore = FileStoreFile[];

@@ -17,7 +17,7 @@ export default function FromFilesPage() {
 
         worker.current.addEventListener(
             'message',
-            ({ data: { type, name, file, outputType, error } }) => {
+            ({ data: { type, name, file, outputType, error, ratio } }) => {
                 switch (type) {
                     case 'processed':
                         setFiles((files) =>
@@ -39,6 +39,14 @@ export default function FromFilesPage() {
                         console.log(error);
                         break;
 
+                    case 'progress':
+                        setFiles((files) =>
+                            files.map((file) =>
+                                file.name != name ? file : { ...file, ratio }
+                            )
+                        );
+                        break;
+
                     case 'output-file-ready':
                         setOutputFileContent(file);
                         setOutputFileType(outputType);
@@ -55,7 +63,10 @@ export default function FromFilesPage() {
     const newFile = (name: string, content: string) => {
         if (filesRef.current.filter((f) => f.name == name).length != 0)
             return alert('Duplicate file ' + name);
-        setFiles((files) => [...files, { name, content, processed: false }]);
+        setFiles((files) => [
+            ...files,
+            { name, content, processed: false, ratio: 0 },
+        ]);
         worker.current?.postMessage({ type: 'new-file', name, content });
     };
 
@@ -88,11 +99,11 @@ export default function FromFilesPage() {
                                     <td>{file.name.split('#')[0]} </td>
                                     <td style={{ textAlign: 'right' }}>
                                         {file.processed ? (
-                                            'Processed'
+                                            '100%'
                                         ) : file.failed ? (
                                             <b>Failed</b>
                                         ) : (
-                                            'Processing...'
+                                            (file.ratio * 100).toFixed(0) + '%'
                                         )}
                                     </td>
                                 </tr>
