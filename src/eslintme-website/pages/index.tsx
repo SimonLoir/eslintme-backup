@@ -22,7 +22,7 @@ const Home: NextPage = () => {
                         features={[
                             'Semicolon required',
                             'Trailing comma required',
-                            'Template string prefered',
+                            'Template string preferred',
                             'No space before function ()',
                         ]}
                     />
