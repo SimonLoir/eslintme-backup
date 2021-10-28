@@ -1,6 +1,7 @@
 import md5 from 'md5';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import dragAndDrop from '@style/DragAndDrop.module.scss';
 
 interface FileManagerProps {
     onNewFile: (hash: string, content: string) => void;
@@ -30,9 +31,10 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
 
     return (
         <>
-            <div {...getRootProps()}>
+            <div {...getRootProps()} className={dragAndDrop.container}>
                 <input {...getInputProps()} />
                 <p>Drag and drop files or click here to select files</p>
+                <p>Accepted extensions : .js</p>
             </div>
         </>
     );
