@@ -11,6 +11,8 @@ export default function FromFilesPage() {
     const worker = useRef<Worker | null>();
 
     useEffect(() => {
+        // Creates a new worker for the page
+        // The worker is destroyed once the page is reloaded
         worker.current = new Worker(
             new URL('../../src/worker.worker.ts', import.meta.url)
         );
@@ -51,7 +53,17 @@ export default function FromFilesPage() {
                         setOutputFileContent(file);
                         setOutputFileType(outputType);
                         console.log(file, outputFileType);
+
+                        const downloadElement = document.createElement('a');
+                        const blob = new Blob([file]);
+                        const url = URL.createObjectURL(blob);
+                        downloadElement.href = url;
+                        downloadElement.download =
+                            '.eslintrc.' + outputFileType;
+                        downloadElement.click();
+
                         break;
+
                     default:
                         console.assert(false, 'Not handled event received');
                         break;

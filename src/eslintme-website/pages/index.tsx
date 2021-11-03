@@ -35,7 +35,7 @@ const Home: NextPage = () => {
                     />
                 </div>
                 <div className={style.other}>
-                    <Link href='from-files/Empty'>
+                    <Link href='/from-files/Empty'>
                         I don&apos;t want to use a model, start from scratch
                     </Link>
                 </div>

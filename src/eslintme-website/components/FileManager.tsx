@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import dragAndDrop from '@style/DragAndDrop.module.scss';
 
@@ -8,6 +8,7 @@ interface FileManagerProps {
 }
 
 export default function FileManager({ onNewFile }: FileManagerProps) {
+    const [onNativeDevice, setOnNativeDevice] = useState(false);
     const onDrop = useCallback(
         (acceptedFiles) => {
             acceptedFiles.forEach((file: File) => {
@@ -27,12 +28,29 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
         [onNewFile]
     );
 
+    const onOpenFolder = useCallback(() => {
+        window.postMessage({ type: 'select-dirs' });
+        console.log('dirs');
+    }, []);
+
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
     });
 
+    useEffect(() => {
+        if ('native' in window) {
+            setOnNativeDevice(true);
+            window.addEventListener('message', (e) => {});
+        }
+    }, []);
+
     return (
         <>
+            {onNativeDevice ? (
+                <>
+                    <button onClick={onOpenFolder}>Open from folder</button>
+                </>
+            ) : null}
             <div {...getRootProps()} className={dragAndDrop.container}>
                 <input {...getInputProps()} />
                 <p>Drag and drop files or click here to select files</p>

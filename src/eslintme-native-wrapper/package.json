@@ -1,0 +1,15 @@
+{
+    "name": "eslintme-native-wrapper",
+    "version": "1.0.0",
+    "description": "A native wrapper for eslintme using electron",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "author": "Simon Loir",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^15.3.0"
+    }
+}
