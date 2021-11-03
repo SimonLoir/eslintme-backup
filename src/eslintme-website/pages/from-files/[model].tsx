@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import style from '@style/FromFile.module.scss';
-import Editor from '@monaco-editor/react';
 import FileManager from '@components/FileManager';
+import Loader from '@components/Loader';
 
 export default function FromFilesPage() {
     const [filesInQueue, setFiles] = useState<FileStore>([]);
@@ -50,6 +50,10 @@ export default function FromFilesPage() {
                     case 'output-file-ready':
                         setOutputFileContent(file);
                         setOutputFileType(outputType);
+                        console.log(file, outputFileType);
+                        break;
+                    default:
+                        console.assert(false, 'Not handled event received');
                         break;
                 }
             }
@@ -60,13 +64,10 @@ export default function FromFilesPage() {
         filesRef.current = filesInQueue;
     }, [filesInQueue]);
 
-    const newFile = (name: string, content: string) => {
+    const newFile = (name: string, content: File) => {
         if (filesRef.current.filter((f) => f.name == name).length != 0)
-            return alert('Duplicate file ' + name);
-        setFiles((files) => [
-            ...files,
-            { name, content, processed: false, ratio: 0 },
-        ]);
+            return console.log('Duplicate file ' + name);
+        setFiles((files) => [...files, { name, processed: false, ratio: 0 }]);
         worker.current?.postMessage({ type: 'new-file', name, content });
     };
 
@@ -87,7 +88,10 @@ export default function FromFilesPage() {
                     <FileManager onNewFile={newFile} />
 
                     {processing.length > 0 ? (
-                        <p>Some files are still being processed</p>
+                        <Loader
+                            text={`${filesInQueue.length - processing.length}/
+                        ${filesInQueue.length} files processed`}
+                        />
                     ) : (
                         ''
                     )}
@@ -111,14 +115,7 @@ export default function FromFilesPage() {
                         </tbody>
                     </table>
                 </div>
-                <div>
-                    <Editor
-                        defaultLanguage={outputFileType}
-                        value={outputFileContent}
-                        theme='vs-dark'
-                        options={{ readOnly: true }}
-                    />
-                </div>
+                <div></div>
             </div>
         </>
     );

@@ -11,7 +11,6 @@ declare module '*.worker.ts' {
 }
 declare interface FileStoreFile {
     name: string;
-    content: string;
     processed: boolean;
     failed?: boolean;
     ratio: number;

@@ -1,25 +1,27 @@
-import md5 from 'md5';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import dragAndDrop from '@style/DragAndDrop.module.scss';
 
+const acceptedExtensions = ['js', 'jsx'];
 interface FileManagerProps {
-    onNewFile: (hash: string, content: string) => void;
+    onNewFile: (hash: string, content: File) => void;
 }
 
 export default function FileManager({ onNewFile }: FileManagerProps) {
     const onDrop = useCallback(
         (acceptedFiles) => {
             acceptedFiles.forEach((file: File) => {
-                if (file.type != 'text/javascript') return;
-                const reader = new FileReader();
-                reader.onload = () => {
+                const file_extension = file.name.split('.').pop();
+                if (!file_extension) return;
+                if (acceptedExtensions.indexOf(file_extension) < 0) return;
+
+                // The setTimeout is used to prevent the thread to be blocked.
+                setTimeout(() => {
                     onNewFile(
-                        file.name + '#' + md5(reader.result as string),
-                        reader.result as string
+                        file.name + '#' + file.lastModified + '.' + file.size,
+                        file
                     );
-                };
-                reader.readAsText(file);
+                }, 0);
             });
         },
         [onNewFile]

@@ -15,10 +15,15 @@ worker.addEventListener(
     ({ data: { name, content, type, outputType } }) => {
         if (type == 'new-file') {
             try {
-                // The extractor processes the file and saves the test result for later use
-                extractor.process(name, content);
-                // We inform the renderer thread that the file was processed successfully
-                worker.postMessage({ type: 'processed', name });
+                const reader = new FileReader();
+                reader.onload = () => {
+                    if (!reader.result) return;
+                    // The extractor processes the file and saves the test result for later use
+                    extractor.process(name, reader.result.toString());
+                    // We inform the renderer thread that the file was processed successfully
+                    worker.postMessage({ type: 'processed', name });
+                };
+                reader.readAsText(content);
             } catch (error) {
                 // We inform the renderer thread that the file was not processed properly
                 worker.postMessage({ type: 'processing-error', name, error });
