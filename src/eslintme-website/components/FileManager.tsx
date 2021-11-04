@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import dragAndDrop from '@style/DragAndDrop.module.scss';
+import md5 from 'md5';
 
 const acceptedExtensions = ['js', 'jsx'];
 interface FileManagerProps {
@@ -40,7 +41,21 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
     useEffect(() => {
         if ('native' in window) {
             setOnNativeDevice(true);
-            window.addEventListener('message', (e) => {});
+            window.addEventListener('message', ({ data }) => {
+                if (data.type == 'new-file') {
+                    const { file, path } = data;
+                    onNewFile(
+                        file.name +
+                            '#' +
+                            file.lastModified +
+                            '.' +
+                            file.size +
+                            'from-import' +
+                            md5(path),
+                        file
+                    );
+                }
+            });
         }
     }, []);
 
@@ -48,7 +63,9 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
         <>
             {onNativeDevice ? (
                 <>
-                    <button onClick={onOpenFolder}>Open from folder</button>
+                    <p>
+                        <button onClick={onOpenFolder}>Open from folder</button>
+                    </p>
                 </>
             ) : null}
             <div {...getRootProps()} className={dragAndDrop.container}>

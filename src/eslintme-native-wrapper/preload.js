@@ -10,4 +10,10 @@ process.once('loaded', () => {
     });
 });
 
-ipcRenderer.on('file', (ev, d) => {});
+ipcRenderer.on('file', (ev, d) => {
+    const blob = new Blob([d.content]);
+    const file = new File([blob], d.name, {
+        lastModified: d.lastModified,
+    });
+    window.postMessage({ type: 'new-file', file, path: d.path });
+});

@@ -25,9 +25,22 @@ app.on('window-all-closed', function () {
 
 function findJSFiles(event, folder) {
     fs.readdirSync(folder).forEach((element) => {
-        const path = folder + '/' + element;
-        if (fs.statSync(path).isDirectory()) return findJSFiles(event, path);
-        console.log(path);
+        const p = folder + '/' + element;
+        const stats = fs.statSync(p);
+
+        if (stats.isDirectory()) return findJSFiles(event, p);
+
+        const { ext, name } = path.parse(p);
+
+        if (ext != '.js') return console.log('skipped ' + p);
+
+        event.reply('file', {
+            path: p,
+            name,
+            lastModified: stats.mtime,
+            size: stats.size,
+            content: fs.readFileSync(p),
+        });
     });
 }
 
