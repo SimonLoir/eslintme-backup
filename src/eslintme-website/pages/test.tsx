@@ -9,14 +9,13 @@ export default function TestPage() {
 function test(){
     console.log('Hello world')
     const test = () => {
-       console.log("hello world");
-       //test
-
-       /*
-       *
-       * test
-       * hello world
-       */
+        console.log("hello world");
+        //test  
+        /*
+        *
+        * test
+        * hello world
+        */
     }
 }`;
 
@@ -25,6 +24,7 @@ function test(){
             loc: true,
             tokens: true,
             ecmaVersion: 'latest',
+            sourceType: 'module',
         });
 
         rule.testFile('a.js', program, content);

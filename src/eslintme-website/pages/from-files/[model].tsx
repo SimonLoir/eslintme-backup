@@ -54,13 +54,13 @@ export default function FromFilesPage() {
                         setOutputFileType(outputType);
                         console.log(file, outputFileType);
 
-                        const downloadElement = document.createElement('a');
-                        const blob = new Blob([file]);
-                        const url = URL.createObjectURL(blob);
-                        downloadElement.href = url;
-                        downloadElement.download =
-                            '.eslintrc.' + outputFileType;
-                        downloadElement.click();
+                        //const downloadElement = document.createElement('a');
+                        //const blob = new Blob([file]);
+                        //const url = URL.createObjectURL(blob);
+                        //downloadElement.href = url;
+                        //downloadElement.download =
+                        //    '.eslintrc.' + outputFileType;
+                        //downloadElement.click();
 
                         break;
 
