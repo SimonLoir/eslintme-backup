@@ -19,4 +19,12 @@
     nav {
         float: right;
     }
+    a + a {
+        margin-left: 15px;
+    }
+
+    h1 {
+        cursor: pointer;
+        font-size: 25px;
+    }
 }

@@ -1,9 +1,13 @@
 import style from '@style/Header.module.scss';
+import Link from 'next/link';
 export default function Header() {
     return (
         <header className={style.header}>
-            <h1>ESLintME</h1>
+            <Link href='/'>
+                <h1>ESLintME</h1>
+            </Link>
             <nav>
+                <Link href='/compare'>Compare Models</Link>
                 <a
                     href='https://eslint.org/docs/rules'
                     target='_blank'
