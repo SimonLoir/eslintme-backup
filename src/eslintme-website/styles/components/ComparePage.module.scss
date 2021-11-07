@@ -12,9 +12,30 @@
     th {
         padding: 15px;
         border: none;
+        max-width: 25%;
+    }
+
+    td {
+        vertical-align: top;
+    }
+    li {
+        //word-break: break-all;
     }
 }
 
 .tr:nth-child(odd) {
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+.off {
+    color: gray;
+    text-align: center;
+}
+.warn {
+    color: orange;
+    text-align: center;
+}
+.error {
+    color: crimson;
+    text-align: center;
 }

@@ -1,5 +1,6 @@
-import { airbnb, google, standadr } from 'utils/eslint.configs';
+import { airbnb, google, standard } from 'utils/eslint.configs';
 import style from '@style/ComparePage.module.scss';
+import RuleRepresentation from '@components/RuleGraphicalRepresentation';
 
 export default function ComparePage() {
     return (
@@ -14,7 +15,7 @@ export default function ComparePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.keys({ ...airbnb, ...google, ...standadr })
+                    {Object.keys({ ...airbnb, ...google, ...standard })
                         .sort()
                         .map((key) => {
                             return (
@@ -31,20 +32,20 @@ export default function ComparePage() {
                                             {key}
                                         </a>
                                     </td>
-                                    <td style={{ wordBreak: 'break-all' }}>
-                                        {google[key]
-                                            ? JSON.stringify(google[key])
-                                            : '/'}
+                                    <td>
+                                        <RuleRepresentation
+                                            value={google[key]}
+                                        />
                                     </td>
-                                    <td style={{ wordBreak: 'break-all' }}>
-                                        {airbnb[key]
-                                            ? JSON.stringify(airbnb[key])
-                                            : '/'}
+                                    <td>
+                                        <RuleRepresentation
+                                            value={airbnb[key]}
+                                        />
                                     </td>
-                                    <td style={{ wordBreak: 'break-all' }}>
-                                        {standadr[key]
-                                            ? JSON.stringify(standadr[key])
-                                            : '/'}
+                                    <td>
+                                        <RuleRepresentation
+                                            value={standard[key]}
+                                        />
                                     </td>
                                 </tr>
                             );

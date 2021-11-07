@@ -17,4 +17,4 @@ export var airbnb = {
 
 export var google = { ...google_config.rules };
 
-export var standadr = { ...standard_config.rules };
+export var standard = { ...standard_config.rules };
