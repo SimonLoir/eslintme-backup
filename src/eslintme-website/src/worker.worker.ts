@@ -12,7 +12,7 @@ extractor.onProgress((currentTask, totalTasks, name, ratio) => {
 
 worker.addEventListener(
     'message',
-    ({ data: { name, content, type, outputType } }) => {
+    ({ data: { name, content, type, outputType, call } }) => {
         if (type == 'new-file') {
             try {
                 const reader = new FileReader();
@@ -42,10 +42,12 @@ worker.addEventListener(
             const file = core.build(outputType);
             // We send the result back to the renderer thread
             worker.postMessage({
-                type: 'output-file-ready',
+                type: call || 'output-file-ready',
                 file,
                 outputType,
             });
+        } else {
+            console.log('Unknown ', type);
         }
     }
 );

@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import style from '@style/FromFile.module.scss';
 import FileManager from '@components/FileManager';
 import Loader from '@components/Loader';
+import { useRouter } from 'next/dist/client/router';
 
 export default function FromFilesPage() {
+    const router = useRouter();
     const [filesInQueue, setFiles] = useState<FileStore>([]);
     const filesRef = useRef(filesInQueue);
     const [outputFileContent, setOutputFileContent] = useState('{}');
@@ -17,6 +19,11 @@ export default function FromFilesPage() {
             new URL('../../src/worker.worker.ts', import.meta.url)
         );
 
+        worker.current.postMessage({
+            type: 'set-model',
+            content: router.query.model,
+        });
+
         worker.current.addEventListener(
             'message',
             ({ data: { type, name, file, outputType, error, ratio } }) => {
@@ -29,6 +36,7 @@ export default function FromFilesPage() {
                                     : { ...file, processed: true }
                             )
                         );
+
                         break;
                     case 'processing-error':
                         setFiles((files) =>
@@ -49,23 +57,31 @@ export default function FromFilesPage() {
                         );
                         break;
 
+                        break;
+
+                    case 'output-to-view':
                     case 'output-file-ready':
                         setOutputFileContent(file);
                         setOutputFileType(outputType);
                         console.log(file, outputFileType);
 
-                        //const downloadElement = document.createElement('a');
-                        //const blob = new Blob([file]);
-                        //const url = URL.createObjectURL(blob);
-                        //downloadElement.href = url;
-                        //downloadElement.download =
-                        //    '.eslintrc.' + outputFileType;
-                        //downloadElement.click();
+                        if (type != 'output-to-view') {
+                            const downloadElement = document.createElement('a');
+                            const blob = new Blob([file]);
+                            const url = URL.createObjectURL(blob);
+                            downloadElement.href = url;
+                            downloadElement.download =
+                                '.eslintrc.' + outputFileType;
+                            downloadElement.click();
+                        }
 
                         break;
 
                     default:
-                        console.assert(false, 'Not handled event received');
+                        console.warn(
+                            'The event received does not match any event : ',
+                            type
+                        );
                         break;
                 }
             }
@@ -74,6 +90,12 @@ export default function FromFilesPage() {
 
     useEffect(() => {
         filesRef.current = filesInQueue;
+        if (filesInQueue.filter((f) => !f.failed && !f.processed).length == 0)
+            worker.current?.postMessage({
+                type: 'build-file',
+                outputType: 'json',
+                call: 'output-to-view',
+            });
     }, [filesInQueue]);
 
     const newFile = (name: string, content: File) => {
@@ -83,8 +105,8 @@ export default function FromFilesPage() {
         worker.current?.postMessage({ type: 'new-file', name, content });
     };
 
-    const buildFile = () =>
-        worker.current?.postMessage({ type: 'build-file', outputType: 'json' });
+    const buildFile = (type: 'json') =>
+        worker.current?.postMessage({ type: 'build-file', outputType: type });
 
     const processing = filesInQueue.filter((f) => !f.failed && !f.processed);
 
@@ -93,7 +115,9 @@ export default function FromFilesPage() {
             <div className={style.grid}>
                 <div>
                     <h2>Control Panel</h2>
-                    <button onClick={buildFile}>Build file</button>
+                    <button onClick={() => buildFile('json')}>
+                        Build file
+                    </button>
                     <br />
                     <br />
                     <h2>Extract rules from files</h2>
@@ -127,7 +151,13 @@ export default function FromFilesPage() {
                         </tbody>
                     </table>
                 </div>
-                <div></div>
+                <div>
+                    <h2>Rules found</h2>
+
+                    <h2>Conflicts</h2>
+
+                    <h2>Your exceptions</h2>
+                </div>
             </div>
         </>
     );
