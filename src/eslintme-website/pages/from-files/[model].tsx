@@ -157,6 +157,9 @@ export default function FromFilesPage() {
                     <h2>Conflicts</h2>
 
                     <h2>Your exceptions</h2>
+
+                    <h2>Config file content</h2>
+                    <pre>{outputFileContent}</pre>
                 </div>
             </div>
         </>
