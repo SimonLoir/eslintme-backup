@@ -18,3 +18,5 @@ export var airbnb = {
 export var google = { ...google_config.rules };
 
 export var standard = { ...standard_config.rules };
+
+// recommended : https://github.com/eslint/eslint/blob/main/conf/eslint-recommended.js

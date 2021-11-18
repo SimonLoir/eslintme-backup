@@ -1,4 +1,4 @@
-const { contextBridge, dialog, remote, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('native', true);
 

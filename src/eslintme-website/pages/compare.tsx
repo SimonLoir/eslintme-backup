@@ -8,7 +8,7 @@ export default function ComparePage() {
             <table className={style.table}>
                 <thead>
                     <tr>
-                        <th>Règle</th>
+                        <th>Rule</th>
                         <th>Google</th>
                         <th>Airbnb</th>
                         <th>Standard</th>
