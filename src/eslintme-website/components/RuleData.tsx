@@ -3,8 +3,8 @@ export default function RuleData({ value }: { value: any }) {
         if (typeof value == 'object') {
             return (
                 <ol>
-                    {value.map((e) => (
-                        <li key={e}>
+                    {value.map((e, i) => (
+                        <li key={e + '-' + i}>
                             <RuleData value={e} />
                         </li>
                     ))}
@@ -14,13 +14,16 @@ export default function RuleData({ value }: { value: any }) {
     }
     if (typeof value == 'object') {
         return (
-            <ul>
-                {Object.keys(value).map((e) => (
-                    <li key={e}>
-                        {e} : <RuleData value={value[e]} />
-                    </li>
-                ))}
-            </ul>
+            <>
+                <b>Object</b>
+                <ul>
+                    {Object.keys(value).map((e) => (
+                        <li key={e}>
+                            {e} : <RuleData value={value[e]} />
+                        </li>
+                    ))}
+                </ul>
+            </>
         );
     }
     return <>{JSON.stringify(value)}</>;

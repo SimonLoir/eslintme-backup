@@ -1,0 +1,48 @@
+@import '../config';
+$gray: rgb(54, 54, 54);
+.bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid $gray;
+    width: 75%;
+    z-index: -1;
+}
+
+.step {
+    text-align: center;
+    display: grid;
+    align-items: center;
+    color: $white;
+}
+
+.point {
+    $w: 30px;
+    margin: auto;
+    border-radius: $w;
+    width: $w;
+    height: $w;
+    display: grid;
+    align-items: center;
+    background: $gray;
+    border: 2px solid $gray;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.selected {
+    background: darken($gray, 5%);
+    border: 2px solid lightgray;
+}
+
+.sideButton {
+    text-align: center;
+    display: grid;
+    align-items: center;
+}
+
+.link {
+    cursor: pointer;
+    color: $blue;
+}

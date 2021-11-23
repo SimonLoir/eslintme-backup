@@ -6,7 +6,7 @@ interface ModelProps {
 }
 export default function Model({ name, features }: ModelProps) {
     return (
-        <Link href={'/from-files/' + name} passHref>
+        <Link href={'/' + name} passHref>
             <div className={style.model}>
                 <h2>{name}</h2>
                 {features.map((f) => (

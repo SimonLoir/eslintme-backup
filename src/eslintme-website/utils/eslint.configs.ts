@@ -8,15 +8,17 @@ import * as airbnb_style from 'eslint-config-airbnb-base/rules/style';
 import * as google_config from 'eslint-config-google';
 //@ts-ignore
 import * as standard_config from 'eslint-config-standard';
+//@ts-ignore
+import * as eslint_recommended from 'eslint/conf/eslint-recommended';
 
-export var airbnb = {
+export const airbnb = {
     ...airbnb_best_practices.rules,
     ...airbnb_es6.rules,
     ...airbnb_style.rules,
 };
+console.log(eslint_recommended);
+export const google = { ...eslint_recommended.rules, ...google_config.rules };
 
-export var google = { ...google_config.rules };
-
-export var standard = { ...standard_config.rules };
+export const standard = { ...standard_config.rules };
 
 // recommended : https://github.com/eslint/eslint/blob/main/conf/eslint-recommended.js
