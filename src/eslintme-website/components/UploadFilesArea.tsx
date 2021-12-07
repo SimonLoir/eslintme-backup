@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import FileManager from './FileManager';
 import Loader from './Loader';
 
-export default function UploadFilesArea({ worker }: { worker: Worker }) {
+export default function UploadFilesArea({
+    worker,
+    display,
+}: {
+    worker: Worker;
+    display: boolean;
+}) {
     const [filesInQueue, setFiles] = useState<FileStore>([]);
     const filesRef = useRef(filesInQueue);
 
@@ -60,7 +66,7 @@ export default function UploadFilesArea({ worker }: { worker: Worker }) {
     return (
         <div
             style={{
-                display: 'grid',
+                display: display ? 'grid' : 'none',
                 gridTemplateColumns: 'repeat(2, 1fr)',
                 gap: '25px',
                 height: '100%',

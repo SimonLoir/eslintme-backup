@@ -22,7 +22,9 @@ export default function WorkingArea({ state }: { state: number }) {
     if (!worker.current || loading)
         return <>Please wait while the app is loading...</>;
 
-    if (state == 0) return <UploadFilesArea worker={worker.current} />;
-
-    return <>Fatal error</>;
+    return (
+        <>
+            <UploadFilesArea worker={worker.current} display={state == 0} />
+        </>
+    );
 }
