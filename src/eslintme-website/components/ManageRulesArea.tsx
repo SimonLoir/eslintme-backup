@@ -35,12 +35,7 @@ export default function ManageRulesArea({
             <div>
                 <h2>Exceptions</h2>
                 <div>
-                    <input
-                        type='radio'
-                        value='recommended'
-                        name='force'
-                        checked={true}
-                    />
+                    <input type='radio' value='recommended' name='force' />
                     Don't force anything
                     <br />
                     <input type='radio' value='recommended' name='force' />
