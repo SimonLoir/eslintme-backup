@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useRef, useState } from 'react';
 import ESWorker from 'utils/worker';
+import ManageRulesArea from './ManageRulesArea';
 import UploadFilesArea from './UploadFilesArea';
 
 export default function WorkingArea({ state }: { state: number }) {
@@ -25,6 +26,7 @@ export default function WorkingArea({ state }: { state: number }) {
     return (
         <>
             <UploadFilesArea worker={worker.current} display={state == 0} />
+            <ManageRulesArea worker={worker.current} display={state == 1} />
         </>
     );
 }
