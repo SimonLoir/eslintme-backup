@@ -44,6 +44,10 @@ button {
     border: none;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 15px;
+    & + button {
+        margin-left: 15px;
+    }
 }
 
 ::-webkit-scrollbar {
