@@ -14,6 +14,8 @@ export default function UploadFilesArea({
 
     useEffect(() => {
         filesRef.current = filesInQueue;
+        if (filesInQueue.filter((f) => !f.failed && !f.processed).length == 0)
+            worker.postMessage({ type: 'upload-finished' });
     }, [filesInQueue]);
 
     useEffect(() => {

@@ -8,10 +8,10 @@ export default function ManageRulesArea({
     display: boolean;
 }) {
     useEffect(() => {
-        worker.addEventListener('message', ({ data: { type, name } }) => {
-            switch (type) {
-                case '//event':
-                    //
+        worker.addEventListener('message', ({ data }) => {
+            switch (data.type) {
+                case 'extract-rules':
+                    console.log(data);
                     break;
             }
         });

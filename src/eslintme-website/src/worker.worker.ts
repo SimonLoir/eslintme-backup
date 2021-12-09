@@ -46,6 +46,15 @@ worker.addEventListener(
                 file,
                 outputType,
             });
+        } else if (type == 'upload-finished') {
+            // We generate the output file based on its type
+            const file = core.build('json');
+            // We send the result back to the renderer thread
+            worker.postMessage({
+                type: call || 'extract-rules',
+                file,
+                outputType: 'json',
+            });
         } else {
             console.log('Unknown ', type);
         }
