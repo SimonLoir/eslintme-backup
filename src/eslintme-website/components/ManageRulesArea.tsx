@@ -45,10 +45,10 @@ export default function ManageRulesArea({
                     model rules
                     <br />
                     <input type='radio' value='model' name='force' /> Force
-                    eslint rules and override with model rules
+                    eslint recommended rules, then model rules
                     <br />
                     <input type='radio' value='model' name='force' /> Force
-                    model rules and override with eslint rules
+                    model rules, then eslint recommended rules
                 </div>
             </div>
         </div>
