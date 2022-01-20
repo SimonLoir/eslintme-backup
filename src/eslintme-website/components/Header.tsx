@@ -15,6 +15,7 @@ export default function Header() {
                 >
                     ESLint Rules
                 </a>
+                <Link href='/about'>About</Link>
             </nav>
         </header>
     );

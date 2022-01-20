@@ -3,6 +3,11 @@ import WarningIcon from '@mui/icons-material/Warning';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import style from '@style/ComparePage.module.scss';
 
+/**
+ * Returns a rule's graphical representation based on the rule's status
+ * @param props React props containing the rule's current status
+ * @returns a ReactComponent representing the rule
+ */
 export default function RuleStatusIcon({
     status,
 }: {

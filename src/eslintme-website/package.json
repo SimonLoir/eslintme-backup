@@ -2,11 +2,13 @@
     "name": "eslintme-website",
     "version": "0.1.0",
     "private": true,
+    "license": "MIT",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "licence": "license-report --only=prod --output=json > public/licenses.json"
     },
     "dependencies": {
         "@emotion/react": "^11.5.0",
@@ -14,7 +16,9 @@
         "@monaco-editor/react": "^4.3.1",
         "@mui/icons-material": "^5.0.5",
         "@mui/material": "^5.0.6",
+        "eslint": "^7.32.0",
         "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-google": "^0.14.0",
         "eslint-config-standard": "^16.0.3",
         "espree": "^9.0.0",
         "md5": "^2.3.0",
@@ -23,11 +27,10 @@
         "react-dom": "^17.0.2",
         "react-drag-drop-files": "^2.1.14",
         "react-dropzone": "^11.4.2",
-        "sass": "^1.43.2",
-        "eslint": "^7.32.0",
-        "eslint-config-google": "^0.14.0"
+        "sass": "^1.43.2"
     },
     "devDependencies": {
+        "license-report": "^4.5.0",
         "@types/md5": "^2.3.1",
         "@types/react": "17.0.30",
         "eslint-config-next": "11.1.2",

@@ -18,6 +18,7 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
                 if (acceptedExtensions.indexOf(file_extension) < 0) return;
 
                 // The setTimeout is used to prevent the thread to be blocked.
+                // The progress can then be rendered on the screen
                 setTimeout(() => {
                     onNewFile(
                         file.name + '#' + file.lastModified + '.' + file.size,

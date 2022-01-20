@@ -11,15 +11,12 @@ export default function ModelPage() {
             style={{
                 position: 'relative',
                 display: 'grid',
-                gridTemplateRows: '1fr 50px',
+                gridTemplateRows: '30px 1fr',
                 height: '100%',
                 width: '100%',
-                gap: 25,
+                gap: 45,
             }}
         >
-            <div style={{ overflow: 'hidden' }}>
-                <WorkingArea state={step} />
-            </div>
             <div
                 style={{
                     position: 'relative',
@@ -58,6 +55,9 @@ export default function ModelPage() {
                         </span>
                     ) : null}
                 </div>
+            </div>
+            <div style={{ overflow: 'hidden' }}>
+                <WorkingArea state={step} />
             </div>
         </div>
     );
