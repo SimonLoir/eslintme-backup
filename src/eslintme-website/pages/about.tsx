@@ -31,13 +31,13 @@ export default function LicencePage() {
                     </tr>
                 </thead>
                 {licences.map((l, i) => (
-                    <tr>
-                        <td key={i}>
+                    <tr key={i}>
+                        <td>
                             <a href={l.link.replace('git+', '')}>{l.name}</a>
                         </td>
-                        <td key={i}>{l.author}</td>
-                        <td key={i}>{l.installedVersion}</td>
-                        <td key={i}>{l.licenseType}</td>
+                        <td>{l.author}</td>
+                        <td>{l.installedVersion}</td>
+                        <td>{l.licenseType}</td>
                     </tr>
                 ))}
             </table>

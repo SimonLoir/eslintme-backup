@@ -17,7 +17,6 @@ export default function WorkingArea({ state }: { state: number }) {
             type: 'set-model',
             content: router.query.model,
         });
-
         setLoading(false);
     }, []);
 
