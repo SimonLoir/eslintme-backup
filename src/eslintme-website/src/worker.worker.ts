@@ -37,23 +37,10 @@ worker.addEventListener(
                 // We inform the renderer thread that the file was not processed properly
                 worker.postMessage({ type: 'processing-error', name, error });
             }
-        } else if (type == 'build-file') {
-            // We generate the output file based on its type
-            const file = core.build(outputType);
-            // We send the result back to the renderer thread
-            worker.postMessage({
-                type: call || 'output-file-ready',
-                file,
-                outputType,
-            });
         } else if (type == 'upload-finished') {
-            // We generate the output file based on its type
-            const file = core.build('json');
-            // We send the result back to the renderer thread
             worker.postMessage({
-                type: call || 'extract-rules',
-                file,
-                outputType: 'json',
+                type: 'extract-rules',
+                payload: core.extractRules(),
             });
         } else {
             console.log('Unknown ', type);

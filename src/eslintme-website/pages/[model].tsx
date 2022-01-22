@@ -1,6 +1,8 @@
 import ProgressBar from '@components/ProgressBar';
 import WorkingArea from '@components/WorkingArea';
 import pbStyle from '@style/ProgressBar.module.scss';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useState } from 'react';
 
 const steps = ['Upload Files', 'Manage Rules', 'Export'];
@@ -33,7 +35,13 @@ export default function ModelPage() {
                             className={pbStyle.link}
                             onClick={() => setStep((s) => s - 1)}
                         >
-                            &lt; {steps[step - 1]}
+                            <ArrowBackIosNewIcon
+                                style={{
+                                    verticalAlign: 'middle',
+                                    fontSize: 15,
+                                }}
+                            />{' '}
+                            {steps[step - 1]}
                         </span>
                     ) : null}
                 </div>
@@ -51,7 +59,13 @@ export default function ModelPage() {
                             className={pbStyle.link}
                             onClick={() => setStep((s) => s + 1)}
                         >
-                            {steps[step + 1]} &gt;
+                            {steps[step + 1]}{' '}
+                            <ArrowForwardIosIcon
+                                style={{
+                                    verticalAlign: 'middle',
+                                    fontSize: 15,
+                                }}
+                            />
                         </span>
                     ) : null}
                 </div>

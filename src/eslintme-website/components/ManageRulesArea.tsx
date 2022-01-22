@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ManageRulesArea({
     worker,
@@ -7,11 +7,15 @@ export default function ManageRulesArea({
     worker: Worker;
     display: boolean;
 }) {
+    const [rules, setRules] = useState<any>({});
+
     useEffect(() => {
         worker.addEventListener('message', ({ data }) => {
             switch (data.type) {
                 case 'extract-rules':
                     console.log(data);
+                    setRules((e: any) => data.payload);
+                    console.log(rules);
                     break;
             }
         });
@@ -21,35 +25,44 @@ export default function ManageRulesArea({
         <div
             style={{
                 display: display ? 'grid' : 'none',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(2, 1fr)',
                 gap: '25px',
                 height: '100%',
             }}
         >
             <div>
                 <h2>Rules found</h2>
+                <br />
+                <table className='table' style={{ width: '100%' }}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.keys(rules)
+                            .sort()
+                            .map((e, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{e}</td>
+                                        <td>{JSON.stringify(rules[e])}</td>
+
+                                        <td>
+                                            <button style={{ marginTop: 0 }}>
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                    </tbody>
+                </table>
             </div>
             <div>
                 <h2>Conflicts</h2>
-            </div>
-            <div>
-                <h2>Exceptions</h2>
-                <div>
-                    <input type='radio' value='recommended' name='force' />
-                    Don't force anything
-                    <br />
-                    <input type='radio' value='recommended' name='force' />
-                    Force eslint recommended rules
-                    <br />
-                    <input type='radio' value='model' name='force' /> Force
-                    model rules
-                    <br />
-                    <input type='radio' value='model' name='force' /> Force
-                    eslint recommended rules, then model rules
-                    <br />
-                    <input type='radio' value='model' name='force' /> Force
-                    model rules, then eslint recommended rules
-                </div>
             </div>
         </div>
     );

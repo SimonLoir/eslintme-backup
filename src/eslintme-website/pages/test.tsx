@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import * as espree from 'espree';
-import NoVarRule from '@core/rules/NoVarRule';
+import NoDebuggerRule from '@core/rules/NoDebuggerRule';
 
 export default function TestPage() {
     useEffect(() => {
-        const rule = new NoVarRule();
-        const content = `let test = "hello world";const test2 = ""`;
+        const rule = new NoDebuggerRule();
+        const content = `a.debugger();debugger;a.test();`;
         const program = espree.parse(content, {
             range: true,
             loc: true,
@@ -15,14 +15,7 @@ export default function TestPage() {
         });
         const { tokens } = program;
         console.log(tokens);
-        tokens.forEach((token, id) => {
-            if (token.type == 'Keyword') {
-                if (['var', 'let', 'const'].indexOf(token.value) >= 0)
-                    rule.testForToken('a.js', program, content, id);
-            }
-        });
-
-        console.log(rule.extract());
+        tokens.forEach((token, id) => {});
     }, []);
     return <></>;
 }
