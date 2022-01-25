@@ -1,11 +1,16 @@
 import { useEffect } from 'react';
 import * as espree from 'espree';
-import NoDebuggerRule from '@core/rules/NoDebuggerRule';
+import QuotesRule from '@core/rules/QuotesRule';
 
 export default function TestPage() {
     useEffect(() => {
-        const rule = new NoDebuggerRule();
-        const content = `a.debugger();debugger;a.test();`;
+        const rule = new QuotesRule();
+        const content = `console.log('hello world'); 
+        function test(){
+            'use strict';
+            console.log('hello' + 'world' + 'l\\'enfant');
+            console.log("l'enfant")
+        }`;
         const program = espree.parse(content, {
             range: true,
             loc: true,
@@ -14,8 +19,11 @@ export default function TestPage() {
             sourceType: 'module',
         });
         const { tokens } = program;
-        console.log(tokens);
-        tokens.forEach((token, id) => {});
+        tokens.forEach((token, id) => {
+            if (token.type == 'String') {
+                rule.testForToken('a.js', program, content, id);
+            }
+        });
     }, []);
     return <></>;
 }

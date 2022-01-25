@@ -1,4 +1,4 @@
-import { airbnb, google, standard } from 'utils/eslint.configs';
+import { airbnb, google, standard, eslint_rules } from 'utils/eslint.configs';
 import style from '@style/ComparePage.module.scss';
 import RuleRepresentation from '@components/RuleGraphicalRepresentation';
 
@@ -15,7 +15,7 @@ export default function ComparePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.keys({ ...airbnb, ...google, ...standard })
+                    {Object.keys(eslint_rules)
                         .sort()
                         .map((key) => {
                             return (
