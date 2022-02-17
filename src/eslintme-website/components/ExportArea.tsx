@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
+import GraphicalConfigEditor from './GraphicalConfigEdition/GraphicalConfigEditor';
 
 export default function ExportArea({
     worker,
@@ -8,6 +9,8 @@ export default function ExportArea({
     worker: Worker;
     display: boolean;
 }) {
+    const [content, setContent] = useState('{"rules":{}}');
+
     useEffect(() => {
         worker.addEventListener('message', ({ data: { type, blob } }) => {
             switch (type) {
@@ -57,20 +60,12 @@ export default function ExportArea({
                 </p>
                 <Editor
                     defaultLanguage='json'
-                    defaultValue='{}'
+                    defaultValue={content}
                     theme='vs-dark'
                     height='25vh'
+                    options={{ readOnly: true }}
                 />
-            </div>
-            <div>
-                <h2>Customize</h2>
-                <br />
-                <Editor
-                    defaultLanguage='json'
-                    defaultValue='{}'
-                    theme='vs-dark'
-                    height='25vh'
-                />
+                <GraphicalConfigEditor worker={worker} />
             </div>
             <div>
                 <h2>Export</h2>
