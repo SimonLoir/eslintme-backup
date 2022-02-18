@@ -3,31 +3,31 @@
  * Because the WebWorker was not loaded in the production builds.
  */
 
-const SSRPlugin =
-    require('next/dist/build/webpack/plugins/nextjs-ssr-import').default;
-const { dirname, relative, resolve, join } = require('path');
+//const SSRPlugin =
+//    require('next/dist/build/webpack/plugins/nextjs-ssr-import').default;
+//const { dirname, relative, resolve, join } = require('path');
 
 /** @type {import('next').NextConfig} */
 module.exports = {
     reactStrictMode: true,
-    webpack(config) {
-        // Ensures that web workers can import scripts.
-        config.output.publicPath = '/_next/';
-
-        // From https://github.com/vercel/next.js/issues/22581#issuecomment-864476385
-        const ssrPlugin = config.plugins.find(
-            (plugin) => plugin instanceof SSRPlugin
-        );
-
-        if (ssrPlugin) {
-            patchSsrPlugin(ssrPlugin);
-        }
-
-        return config;
-    },
+    //webpack(config) {
+    //    // Ensures that web workers can import scripts.
+    //    config.output.publicPath = '/_next/';
+    //
+    //    // From https://github.com/vercel/next.js/issues/22581#issuecomment-864476385
+    //    const ssrPlugin = config.plugins.find(
+    //        (plugin) => plugin instanceof SSRPlugin
+    //    );
+    //
+    //    if (ssrPlugin) {
+    //        patchSsrPlugin(ssrPlugin);
+    //    }
+    //
+    //    return config;
+    //},
 };
 
-function patchSsrPlugin(plugin) {
+/*function patchSsrPlugin(plugin) {
     plugin.apply = function apply(compiler) {
         compiler.hooks.compilation.tap('NextJsSSRImport', (compilation) => {
             compilation.mainTemplate.hooks.requireEnsure.tap(
@@ -64,3 +64,4 @@ function patchSsrPlugin(plugin) {
         });
     };
 }
+*/

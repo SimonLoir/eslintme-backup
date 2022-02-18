@@ -71,8 +71,10 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
             ) : null}
             <div {...getRootProps()} className={dragAndDrop.container}>
                 <input {...getInputProps()} />
-                <p>Drag and drop files or click here to select files</p>
-                <p>Accepted extensions : .js</p>
+                <p style={{ textAlign: 'center' }}>
+                    Drag and drop files or click here to select files
+                </p>
+                <p style={{ textAlign: 'center' }}>Accepted extensions : .js</p>
             </div>
         </>
     );

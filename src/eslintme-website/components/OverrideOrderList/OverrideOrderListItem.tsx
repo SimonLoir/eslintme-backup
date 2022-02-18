@@ -1,12 +1,73 @@
+import { useEffect, useState } from 'react';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { OOListItem } from './OverrideOrderList';
 export default function OverrideOrderListItem({
     data,
+    onChange,
+    moveUp,
+    moveDown,
+    canGoUp,
+    canGoDown,
 }: {
-    data: {
-        name: string;
-        id: string | undefined;
-        force: boolean;
-        enabled: boolean;
-    };
+    onChange: (enable: boolean, force: boolean) => void;
+    moveUp: () => void;
+    moveDown: () => void;
+    data: OOListItem;
+    canGoUp: boolean;
+    canGoDown: boolean;
 }) {
-    return <div style={{ display: 'block', padding: '15px' }}>{data.name}</div>;
+    const [enable, setEnable] = useState(false);
+    const [force, setForce] = useState(false);
+
+    const changeEnable = (enable: boolean) => {
+        setEnable(enable);
+        onChange(enable, force);
+    };
+    const changeForce = (force: boolean) => {
+        setForce(force);
+        onChange(enable, force);
+    };
+
+    useEffect(() => {
+        setEnable(data.enabled);
+        setForce(data.force);
+    }, []);
+
+    return (
+        <>
+            <tr>
+                <td>
+                    {canGoUp ? (
+                        <ArrowUpwardIcon onClick={moveUp}></ArrowUpwardIcon>
+                    ) : (
+                        ''
+                    )}
+                    {canGoDown ? (
+                        <ArrowDownwardIcon
+                            onClick={moveDown}
+                        ></ArrowDownwardIcon>
+                    ) : (
+                        ''
+                    )}
+                </td>
+                <td>{data.name}</td>
+                <td>
+                    <input
+                        type='checkbox'
+                        checked={force}
+                        onChange={(e) => changeForce(e.target.checked)}
+                    />
+                </td>
+
+                <td>
+                    <input
+                        type='checkbox'
+                        checked={enable}
+                        onChange={(e) => changeEnable(e.target.checked)}
+                    />
+                </td>
+            </tr>
+        </>
+    );
 }

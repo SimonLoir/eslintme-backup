@@ -102,47 +102,62 @@ export default function UploadFilesArea({
                         } files processed - ${failed} failed`
                     )}
                 </p>
-                <h3>Rules order</h3>
-                <OverrideOrderList worker={worker} />
+
+                {filesInQueue.length > 0 ? (
+                    <div>
+                        <table
+                            className='table'
+                            style={{ width: '100%', marginTop: 15 }}
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filesInQueue.sort().map((file) => (
+                                    <tr
+                                        key={file.name}
+                                        style={{ textAlign: 'center' }}
+                                    >
+                                        <td>{file.name.split('#')[0]} </td>
+                                        <td>
+                                            {file.processed ? (
+                                                '100%'
+                                            ) : file.failed ? (
+                                                <b>Failed</b>
+                                            ) : (
+                                                (file.ratio * 100).toFixed(0) +
+                                                '%'
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div>
+                        <p>
+                            This program processes your files locally. None of
+                            the files you provide to this program will be sent
+                            anywhere. If you downloaded the app, you can also
+                            use ESLintME without an internet connection !
+                        </p>
+                    </div>
+                )}
             </div>
 
-            {filesInQueue.length > 0 ? (
-                <div style={{ overflow: 'auto' }}>
-                    <h2>Files processed</h2>
-                    <table
-                        className='table'
-                        style={{ width: '100%', marginTop: 15 }}
-                    >
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Progress</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filesInQueue.sort().map((file) => (
-                                <tr
-                                    key={file.name}
-                                    style={{ textAlign: 'center' }}
-                                >
-                                    <td>{file.name.split('#')[0]} </td>
-                                    <td>
-                                        {file.processed ? (
-                                            '100%'
-                                        ) : file.failed ? (
-                                            <b>Failed</b>
-                                        ) : (
-                                            (file.ratio * 100).toFixed(0) + '%'
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            ) : (
-                ''
-            )}
+            <div>
+                <h2>Rules order</h2>
+                <p>
+                    You can enable and disable some sets of rules. You can also
+                    choose whether or not those rules should override the rules
+                    below.
+                </p>
+                <OverrideOrderList worker={worker} />
+            </div>
         </div>
     );
 }
