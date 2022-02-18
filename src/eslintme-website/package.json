@@ -10,7 +10,7 @@
         "start": "next start",
         "lint": "next lint",
         "licence": "license-report --only=prod --output=json > public/licenses.json",
-        "export-to-electron": "next build; next export; mv out/ ../eslintme-native-wrapper/files"
+        "export-to-electron": "next build; next export; rm -rf ../eslintme-native-wrapper/files; mv out/ ../eslintme-native-wrapper/files"
     },
     "dependencies": {
         "@emotion/react": "^11.7.1",

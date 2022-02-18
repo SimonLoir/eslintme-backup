@@ -14,7 +14,6 @@ const loadURL = serve({ directory: 'files' });
 async function newWindow() {
     // Creates a new browser window and injects "glue" script
     const main = new BrowserWindow({
-        fullscreen: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             sandbox: true,

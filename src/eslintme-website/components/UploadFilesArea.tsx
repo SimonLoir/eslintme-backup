@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import FileManager from './FileManager';
 import Loader from './Loader';
+import OverrideOrderList from './OverrideOrderList/OverrideOrderList';
 
 export default function UploadFilesArea({
     worker,
@@ -80,7 +81,7 @@ export default function UploadFilesArea({
                 height: '100%',
             }}
         >
-            <div>
+            <div style={{ overflow: 'auto' }}>
                 <h2>Upload files</h2>
                 <p>
                     If you want to create a config file based on other projects,
@@ -88,18 +89,23 @@ export default function UploadFilesArea({
                     upload flies, you can skip this step.
                 </p>
                 <FileManager onNewFile={newFile} />
-                {processing.length > 0 ? (
-                    <Loader
-                        text={`${filesInQueue.length - processing.length}/
-                        ${filesInQueue.length} files processed`}
-                    />
-                ) : (
-                    `${filesInQueue.length - processing.length}/
+                <p>
+                    {processing.length > 0 ? (
+                        <Loader
+                            text={`${filesInQueue.length - processing.length}/
+                    ${filesInQueue.length} files processed`}
+                        />
+                    ) : (
+                        `${filesInQueue.length - processing.length}/
                         ${
                             filesInQueue.length
                         } files processed - ${failed} failed`
-                )}
+                    )}
+                </p>
+                <h3>Rules order</h3>
+                <OverrideOrderList worker={worker} />
             </div>
+
             {filesInQueue.length > 0 ? (
                 <div style={{ overflow: 'auto' }}>
                     <h2>Files processed</h2>
