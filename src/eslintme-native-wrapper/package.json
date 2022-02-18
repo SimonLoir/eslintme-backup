@@ -5,14 +5,27 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "electron ."
+        "start": "electron .",
+        "package": "electron-builder"
     },
     "author": "Simon Loir",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^15.3.0"
+        "electron": "^15.3.0",
+        "electron-builder": "^22.14.13"
     },
     "dependencies": {
         "electron-serve": "^1.1.0"
+    },
+    "build": {
+        "appId": "be.simonloir.${name}",
+        "productName": "ESLintME",
+        "mac": {
+            "category": "public.app-category.developer-tools",
+            "target": {
+                "target": "default",
+                "arch": "universal"
+            }
+        }
     }
 }
