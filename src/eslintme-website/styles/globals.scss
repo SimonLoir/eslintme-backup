@@ -84,3 +84,20 @@ p {
         background-color: rgba(255, 255, 255, 0.05);
     }
 }
+
+.rotating-gear {
+    font-size: 15px;
+    display: inline-block;
+    margin: auto;
+
+    animation: 2s linear infinite rotate;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

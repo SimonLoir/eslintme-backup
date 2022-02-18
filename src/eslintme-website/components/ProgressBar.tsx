@@ -1,4 +1,5 @@
 import style from '@style/ProgressBar.module.scss';
+import { useEffect, useState } from 'react';
 import ProgressBarStep from './ProgressBarStep';
 export default function ProgressBar({
     steps,
@@ -9,6 +10,28 @@ export default function ProgressBar({
     current: number;
     select: (e: number) => void;
 }) {
+    const [loader, setLoader] = useState<any>({});
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        window.addEventListener('message', ({ data }) => {
+            if (data.type == 'new-file') {
+                console.log('new-file');
+                setLoader((l: any) => {
+                    l['1'] = true;
+                    setCount((count) => count + 1);
+                    return l;
+                });
+            } else if (data.type == 'process-finished') {
+                setLoader((l: any) => {
+                    l['1'] = false;
+                    setCount((count) => 0);
+                    return l;
+                });
+            }
+        });
+    }, []);
+
     return (
         <>
             <div
@@ -23,8 +46,10 @@ export default function ProgressBar({
                         name={step}
                         selected={current == i}
                         select={select}
+                        loading={loader[(i + 1).toString()]}
                     />
                 ))}
+                <span style={{ display: 'none' }}>{count}</span>
             </div>
         </>
     );

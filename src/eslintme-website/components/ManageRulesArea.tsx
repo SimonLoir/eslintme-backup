@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ConflictsArea from './ConflictsArea';
 
 export default function ManageRulesArea({
     worker,
@@ -38,7 +39,6 @@ export default function ManageRulesArea({
                         <tr>
                             <th>Name</th>
                             <th>Value</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,12 +49,6 @@ export default function ManageRulesArea({
                                     <tr key={i}>
                                         <td>{e}</td>
                                         <td>{JSON.stringify(rules[e])}</td>
-
-                                        <td>
-                                            <button style={{ marginTop: 0 }}>
-                                                Delete
-                                            </button>
-                                        </td>
                                     </tr>
                                 );
                             })}
@@ -63,6 +57,7 @@ export default function ManageRulesArea({
             </div>
             <div>
                 <h2>Conflicts</h2>
+                <ConflictsArea rules={rules} />
             </div>
         </div>
     );

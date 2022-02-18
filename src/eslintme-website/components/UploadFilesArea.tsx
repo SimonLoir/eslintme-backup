@@ -13,9 +13,12 @@ export default function UploadFilesArea({
     const filesRef = useRef(filesInQueue);
 
     useEffect(() => {
+        // Sends a message to the worker when all the file have been sent
         filesRef.current = filesInQueue;
-        if (filesInQueue.filter((f) => !f.failed && !f.processed).length == 0)
+        if (filesInQueue.filter((f) => !f.failed && !f.processed).length == 0) {
             worker.postMessage({ type: 'upload-finished' });
+            window.postMessage({ type: 'process-finished' });
+        }
     }, [filesInQueue]);
 
     useEffect(() => {
@@ -33,6 +36,7 @@ export default function UploadFilesArea({
                         );
 
                         break;
+
                     case 'processing-error':
                         setFiles((files) =>
                             files.map((file) =>
@@ -60,10 +64,12 @@ export default function UploadFilesArea({
         if (filesRef.current.filter((f) => f.name == name).length != 0)
             return console.log('Duplicate file ' + name);
         setFiles((files) => [...files, { name, processed: false, ratio: 0 }]);
+        window.postMessage({ type: 'new-file' });
         worker.postMessage({ type: 'new-file', name, content });
     };
 
     const processing = filesInQueue.filter((f) => !f.failed && !f.processed);
+    const failed = filesInQueue.reduce((acc, f) => acc + (f.failed ? 1 : 0), 0);
 
     return (
         <div
@@ -88,7 +94,10 @@ export default function UploadFilesArea({
                         ${filesInQueue.length} files processed`}
                     />
                 ) : (
-                    ''
+                    `${filesInQueue.length - processing.length}/
+                        ${
+                            filesInQueue.length
+                        } files processed - ${failed} failed`
                 )}
             </div>
             {filesInQueue.length > 0 ? (
