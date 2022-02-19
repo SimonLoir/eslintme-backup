@@ -67,6 +67,10 @@ worker.addEventListener('message', (e) => {
         // Sending the blob to the renderer
         worker.postMessage({ type: 'download-ready', blob });
     } else if (type == 'order-list-change') {
+        console.log('change');
+        core.setRulesOrder(content);
+    } else if (type == 'store-rules-set') {
+        core.setNamedRuleset(content.name, content.data);
     } else {
         console.log('Unknown ', type, e);
     }

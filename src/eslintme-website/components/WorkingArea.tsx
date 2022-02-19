@@ -1,5 +1,11 @@
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useRef, useState } from 'react';
+import {
+    airbnb,
+    google,
+    recommended_rules,
+    standard,
+} from 'utils/eslint.configs';
 import ESWorker from 'utils/worker';
 import ExportArea from './ExportArea';
 import Loader from './Loader';
@@ -13,13 +19,34 @@ export default function WorkingArea({ state }: { state: number }) {
 
     useEffect(() => {
         if (router.query.model) {
+            // Getting an instance of the worker
             worker.current = ESWorker.worker;
 
+            // We set the current model
             worker.current.postMessage({
                 type: 'set-model',
                 content: router.query.model,
             });
 
+            // We populate the worker with the models we might use
+            worker.current.postMessage({
+                type: 'store-rules-set',
+                content: { name: 'model-Google', data: google },
+            });
+            worker.current.postMessage({
+                type: 'store-rules-set',
+                content: { name: 'model-Airbnb', data: airbnb },
+            });
+            worker.current.postMessage({
+                type: 'store-rules-set',
+                content: { name: 'model-Standard', data: standard },
+            });
+            worker.current.postMessage({
+                type: 'store-rules-set',
+                content: { name: 'recommended', data: recommended_rules },
+            });
+
+            // We allow the website to be displayed when the worker is ready
             setLoading(false);
         }
     }, [router.query.model]);

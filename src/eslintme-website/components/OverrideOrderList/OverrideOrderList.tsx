@@ -44,7 +44,7 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
 
     useEffect(() => {
         setOptions([
-            { name: 'Rules found', id: 'r-found', enabled: true, force: false },
+            { name: 'Rules found', id: 'found', enabled: true, force: false },
             {
                 name: `Rules from model (${router.query.model})`,
                 id: `model-${router.query.model}`,
