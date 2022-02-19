@@ -2,13 +2,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import OverrideOrderListItem from './OverrideOrderListItem';
 
-export interface OOListItem {
-    name: string;
-    id: string | undefined;
-    force: boolean;
-    enabled: boolean;
-}
-
 export default function OverrideOrderList({ worker }: { worker: Worker }) {
     const router = useRouter();
     const [options, setOptions] = useState<OOListItem[]>([]);
