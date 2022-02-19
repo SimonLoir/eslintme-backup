@@ -1,4 +1,6 @@
 import licences from '../public/licenses.json';
+import licences_native from '../public/licenses-native.json';
+import licences_core from '../public/licenses-core.json';
 export default function LicencePage() {
     return (
         <div style={{ overflow: 'auto', height: '100%' }}>
@@ -31,18 +33,20 @@ export default function LicencePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {licences.map((l, i) => (
-                        <tr key={i}>
-                            <td>
-                                <a href={l.link.replace('git+', '')}>
-                                    {l.name}
-                                </a>
-                            </td>
-                            <td>{l.author}</td>
-                            <td>{l.installedVersion}</td>
-                            <td>{l.licenseType}</td>
-                        </tr>
-                    ))}
+                    {[...licences, ...licences_core, ...licences_native].map(
+                        (l, i) => (
+                            <tr key={i}>
+                                <td>
+                                    <a href={l.link.replace('git+', '')}>
+                                        {l.name}
+                                    </a>
+                                </td>
+                                <td>{l.author}</td>
+                                <td>{l.installedVersion}</td>
+                                <td>{l.licenseType}</td>
+                            </tr>
+                        )
+                    )}
                 </tbody>
             </table>
         </div>

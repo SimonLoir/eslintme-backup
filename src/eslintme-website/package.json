@@ -9,7 +9,9 @@
         "static": "next export",
         "start": "next start",
         "lint": "next lint",
-        "licence": "license-report --only=prod --output=json > public/licenses.json",
+        "licences": "license-report --output=json > public/licenses.json; npm run licences-core; npm run licences-native",
+        "licences-core": "license-report --package lib/eslintme-core/package.json --output=json > public/licenses-core.json",
+        "licences-native": "license-report --package ../eslintme-native-wrapper/package.json --output=json > public/licenses-native.json",
         "export-to-electron": "next build; next export; rm -rf ../eslintme-native-wrapper/files; mv out/ ../eslintme-native-wrapper/files"
     },
     "dependencies": {

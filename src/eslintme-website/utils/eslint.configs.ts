@@ -26,4 +26,6 @@ export const standard = { ...standard_config.rules };
 
 export const eslint_rules = { ...eslint_all.rules };
 
+export const recommended_rules = { ...eslint_recommended.rules };
+
 // recommended : https://github.com/eslint/eslint/blob/main/conf/eslint-recommended.js

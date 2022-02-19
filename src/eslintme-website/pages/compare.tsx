@@ -1,4 +1,10 @@
-import { airbnb, google, standard, eslint_rules } from 'utils/eslint.configs';
+import {
+    airbnb,
+    google,
+    standard,
+    eslint_rules,
+    recommended_rules,
+} from 'utils/eslint.configs';
 import style from '@style/ComparePage.module.scss';
 import RuleRepresentation from '@components/RuleGraphicalRepresentation';
 
@@ -12,6 +18,7 @@ export default function ComparePage() {
                         <th>Google</th>
                         <th>Airbnb</th>
                         <th>Standard</th>
+                        <th>Recommended</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +52,12 @@ export default function ComparePage() {
                                     <td>
                                         <RuleRepresentation
                                             value={standard[key]}
+                                        />
+                                    </td>
+
+                                    <td>
+                                        <RuleRepresentation
+                                            value={recommended_rules[key]}
                                         />
                                     </td>
                                 </tr>

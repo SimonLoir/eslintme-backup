@@ -140,8 +140,8 @@ export default function UploadFilesArea({
                 ) : (
                     <div>
                         <p>
-                            This program processes your files locally. None of
-                            the files you provide to this program will be sent
+                            This web app processes your files locally. None of
+                            the files you provide to this app will be sent
                             anywhere. If you downloaded the app, you can also
                             use ESLintME without an internet connection !
                         </p>
