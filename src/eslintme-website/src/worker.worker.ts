@@ -66,6 +66,7 @@ worker.addEventListener('message', (e) => {
 
         // Sending the blob to the renderer
         worker.postMessage({ type: 'download-ready', blob });
+    } else if (type == 'order-list-change') {
     } else {
         console.log('Unknown ', type, e);
     }
