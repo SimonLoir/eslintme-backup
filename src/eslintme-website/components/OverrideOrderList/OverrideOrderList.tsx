@@ -12,6 +12,7 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
      */
     const notifyOptionsChange = (opt: OOListItem[]) => {
         worker.postMessage({ type: 'order-list-change', content: opt });
+        return opt;
     };
 
     /**
@@ -43,21 +44,28 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
     };
 
     useEffect(() => {
-        setOptions([
-            { name: 'Rules found', id: 'found', enabled: true, force: false },
-            {
-                name: `Rules from model (${router.query.model})`,
-                id: `model-${router.query.model}`,
-                enabled: true,
-                force: false,
-            },
-            {
-                name: 'Rules recommended',
-                id: 'recommended',
-                enabled: true,
-                force: false,
-            },
-        ]);
+        setOptions(
+            notifyOptionsChange([
+                {
+                    name: 'Rules found',
+                    id: 'found',
+                    enabled: true,
+                    force: true,
+                },
+                {
+                    name: `Rules from model (${router.query.model})`,
+                    id: router.query.model?.toString(),
+                    enabled: true,
+                    force: true,
+                },
+                {
+                    name: 'Rules recommended',
+                    id: 'recommended',
+                    enabled: true,
+                    force: true,
+                },
+            ])
+        );
     }, [router.query.model]);
 
     return (

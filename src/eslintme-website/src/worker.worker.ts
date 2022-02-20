@@ -7,15 +7,14 @@ const worker: Worker = self as unknown as Worker;
 const core = new Core();
 const extractor = core.rules;
 
-extractor.onProgress((currentTask, totalTasks, name, ratio) => {
-    worker.postMessage({ type: 'progress', name, ratio });
-});
-
 worker.addEventListener('message', (e) => {
     const {
         data: { name, content, type, format, call },
     } = e;
     if (type == 'new-file') {
+        /**
+         * The renderer can ask the worker to process a file.
+         */
         try {
             const reader = new FileReader();
             reader.onload = () => {
@@ -30,14 +29,13 @@ worker.addEventListener('message', (e) => {
                     worker.postMessage({
                         type: 'processing-error',
                         name,
-                        error,
                     });
                 }
             };
             reader.readAsText(content);
         } catch (error) {
             // We inform the renderer thread that the file was not processed properly
-            worker.postMessage({ type: 'processing-error', name, error });
+            worker.postMessage({ type: 'processing-error', name });
         }
     } else if (type == 'upload-finished') {
         /**
@@ -67,9 +65,15 @@ worker.addEventListener('message', (e) => {
         // Sending the blob to the renderer
         worker.postMessage({ type: 'download-ready', blob });
     } else if (type == 'order-list-change') {
-        console.log('change');
+        /**
+         * The renderer can ask the worker to change the order in which the rules are processed
+         */
         core.setRulesOrder(content);
     } else if (type == 'store-rules-set') {
+        /**
+         * The renderer can store a new set of rules and give it a name.
+         * The new set of rules can then be used to generate the config file.
+         */
         core.setNamedRuleset(content.name, content.data);
     } else {
         console.log('Unknown ', type, e);
