@@ -78,6 +78,13 @@ worker.addEventListener('message', (e) => {
     } else {
         console.log('Unknown ', type, e);
     }
+
+    if (type == 'order-list-change' || type == 'upload-finished') {
+        worker.postMessage({
+            type: 'export-config',
+            payload: { rules: core.getRules(), exceptions: core.exceptions },
+        });
+    }
 });
 
 console.log(eslint_rules);

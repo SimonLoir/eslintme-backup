@@ -11,8 +11,10 @@ function isValidValue(value: number | string) {
 
 export default function RuleRepresentation({
     value,
+    icon = true,
 }: {
     value: number | string | any[];
+    icon?: boolean;
 }) {
     if (!value) return <></>;
     if (typeof value == 'object') {
@@ -25,7 +27,7 @@ export default function RuleRepresentation({
 
         return (
             <>
-                {statusIcon}
+                {icon ? statusIcon : ''}
                 <RuleData value={v} />
             </>
         );

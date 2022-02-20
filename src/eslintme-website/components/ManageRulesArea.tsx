@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ConflictsArea from './ConflictsArea';
+import GraphicalConfigEditor from './GraphicalConfigEdition/GraphicalConfigEditor';
 import RuleRepresentation from './RuleGraphicalRepresentation';
 
 export default function ManageRulesArea({
@@ -69,6 +69,7 @@ export default function ManageRulesArea({
             </div>
             <div style={{ overflow: 'auto' }}>
                 <h2>Configuration Editor</h2>
+                <GraphicalConfigEditor worker={worker} />
             </div>
         </div>
     );

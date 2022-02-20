@@ -31,15 +31,15 @@ export default function WorkingArea({ state }: { state: number }) {
             // We populate the worker with the models we might use
             worker.current.postMessage({
                 type: 'store-rules-set',
-                content: { name: 'model-Google', data: google },
+                content: { name: 'Google', data: google },
             });
             worker.current.postMessage({
                 type: 'store-rules-set',
-                content: { name: 'model-Airbnb', data: airbnb },
+                content: { name: 'Airbnb', data: airbnb },
             });
             worker.current.postMessage({
                 type: 'store-rules-set',
-                content: { name: 'model-Standard', data: standard },
+                content: { name: 'Standard', data: standard },
             });
             worker.current.postMessage({
                 type: 'store-rules-set',
