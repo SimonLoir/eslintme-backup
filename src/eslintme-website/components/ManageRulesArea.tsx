@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ConflictsArea from './ConflictsArea';
+import RuleRepresentation from './RuleGraphicalRepresentation';
 
 export default function ManageRulesArea({
     worker,
@@ -31,9 +32,16 @@ export default function ManageRulesArea({
                 height: '100%',
             }}
         >
-            <div>
+            <div style={{ overflow: 'auto' }}>
                 <h2>Rules found</h2>
-                <br />
+                <p>
+                    The rules below are the rules extracted from the files you
+                    provided. If the software was not sure about a particular
+                    rule, it removed it from its list. However, if you feel like
+                    the software made a mistake, you can always look in the
+                    "Configuration Editor" view. You may find the other options
+                    the software did not keep.
+                </p>
                 <table className='table' style={{ width: '100%' }}>
                     <thead>
                         <tr>
@@ -48,16 +56,19 @@ export default function ManageRulesArea({
                                 return (
                                     <tr key={i}>
                                         <td>{e}</td>
-                                        <td>{JSON.stringify(rules[e])}</td>
+                                        <td>
+                                            <RuleRepresentation
+                                                value={rules[e]}
+                                            ></RuleRepresentation>
+                                        </td>
                                     </tr>
                                 );
                             })}
                     </tbody>
                 </table>
             </div>
-            <div>
-                <h2>Conflicts</h2>
-                <ConflictsArea rules={rules} />
+            <div style={{ overflow: 'auto' }}>
+                <h2>Configuration Editor</h2>
             </div>
         </div>
     );

@@ -9,12 +9,11 @@ export default function ExportArea({
     worker: Worker;
     display: boolean;
 }) {
-    const [content, setContent] = useState('{"rules":{}}');
-
     useEffect(() => {
         worker.addEventListener('message', ({ data: { type, blob } }) => {
             switch (type) {
                 case 'download-ready':
+                    console.log('New download ready');
                     /**
                      * The worker may indicate that a config file has been generated
                      * The renderer makes it downloadable
@@ -38,6 +37,7 @@ export default function ExportArea({
 
                     // We simulate a click on the element to trigger the download
                     a.click();
+                    a.remove();
                     break;
             }
         });
@@ -52,23 +52,12 @@ export default function ExportArea({
             }}
         >
             <div>
-                <h2>Your config file</h2>
-                <p>
-                    This is how your config file looks like after completing the
-                    first steps. If you want to override certain parts of the
-                    config file, you can edit the "customize" field.
-                </p>
-                <Editor
-                    defaultLanguage='json'
-                    defaultValue={content}
-                    theme='vs-dark'
-                    height='25vh'
-                    options={{ readOnly: true }}
-                />
-                <GraphicalConfigEditor worker={worker} />
-            </div>
-            <div>
                 <h2>Export</h2>
+                <p>
+                    You can now export your ESLint config file in the desired
+                    format. You may want to rename the file with a dot at the
+                    beginning.
+                </p>
                 <button
                     onClick={() =>
                         worker.postMessage({
