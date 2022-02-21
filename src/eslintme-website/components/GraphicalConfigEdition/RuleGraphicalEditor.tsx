@@ -2,6 +2,7 @@ import RuleRepresentation from '@components/RuleGraphicalRepresentation';
 import Rule from '@core/Rule';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
+import RuleLevelChooser from './RuleLevelChooser';
 export default function RuleGraphicalEditor({
     worker,
     data,
@@ -20,7 +21,7 @@ export default function RuleGraphicalEditor({
             style={{
                 lineHeight: '60px',
                 display: 'grid',
-                gridTemplateColumns: '1fr 45px',
+                gridTemplateColumns: '1fr 1fr 45px',
                 borderBottom: '1px solid gray',
                 outline: 'none',
                 userSelect: 'none',
@@ -32,6 +33,9 @@ export default function RuleGraphicalEditor({
             >
                 {name}
             </span>
+            <div style={{ textAlign: 'right' }}>
+                <RuleLevelChooser selected={rule_data[0]} />
+            </div>
             <div>
                 <SettingsIcon
                     style={{ verticalAlign: 'middle', cursor: 'pointer' }}

@@ -1,5 +1,6 @@
 export default function RuleData({ value }: { value: any }) {
     if (Array.isArray(value)) {
+        if (value.length == 0) return <></>;
         if (typeof value == 'object') {
             return (
                 <ol>
