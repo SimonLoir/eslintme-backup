@@ -19,7 +19,7 @@ export default function RuleRepresentation({
     if (!value) return <></>;
     if (typeof value == 'object') {
         let statusIcon: JSX.Element | null = null;
-        if (isValidValue(value[0]))
+        if (isValidValue(value[0]) && icon)
             statusIcon = <RuleStatusIcon status={value[0] as any} />;
         else console.log(value);
 
@@ -27,11 +27,12 @@ export default function RuleRepresentation({
 
         return (
             <>
-                {icon ? statusIcon : ''}
+                {statusIcon}
                 <RuleData value={v} />
             </>
         );
     }
-    if (isValidValue(value)) return <RuleStatusIcon status={value as any} />;
+    if (isValidValue(value) && icon)
+        return <RuleStatusIcon status={value as any} />;
     return <></>;
 }

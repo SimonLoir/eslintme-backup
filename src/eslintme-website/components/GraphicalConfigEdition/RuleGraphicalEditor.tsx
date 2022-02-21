@@ -15,7 +15,8 @@ export default function RuleGraphicalEditor({
     name: string;
 }) {
     const [showMore, setShowMore] = useState(false);
-    const rule_data = Rule.normalize(exception ?? data);
+    const rule_data = exception ?? data;
+    const normalized_data = Rule.normalize(rule_data);
     return (
         <div
             style={{
@@ -34,7 +35,7 @@ export default function RuleGraphicalEditor({
                 {name}
             </span>
             <div style={{ textAlign: 'right' }}>
-                <RuleLevelChooser selected={rule_data[0]} />
+                <RuleLevelChooser selected={normalized_data[0]} />
             </div>
             <div>
                 <SettingsIcon
