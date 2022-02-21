@@ -6,6 +6,7 @@ import { eslint_rules } from 'utils/eslint.configs';
 const worker: Worker = self as unknown as Worker;
 const core = new Core();
 const extractor = core.rules;
+let rules: any = {};
 
 worker.addEventListener('message', (e) => {
     const {
@@ -75,14 +76,27 @@ worker.addEventListener('message', (e) => {
          * The new set of rules can then be used to generate the config file.
          */
         core.setNamedRuleset(content.name, content.data);
+    } else if (type == 'set-exception') {
+        core.addRuleException(content.name, content.data);
+        worker.postMessage({
+            type: 'export-config',
+            payload: { rules, exceptions: core.exceptions },
+        });
+    } else if (type == 'remove-exception') {
+        core.removeException(content);
+        worker.postMessage({
+            type: 'export-config',
+            payload: { rules, exceptions: core.exceptions },
+        });
     } else {
         console.log('Unknown ', type, e);
     }
 
     if (type == 'order-list-change' || type == 'upload-finished') {
+        rules = core.getRules();
         worker.postMessage({
             type: 'export-config',
-            payload: { rules: core.getRules(), exceptions: core.exceptions },
+            payload: { rules, exceptions: core.exceptions },
         });
     }
 });

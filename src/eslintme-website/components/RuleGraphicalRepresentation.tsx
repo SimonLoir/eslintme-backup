@@ -21,7 +21,6 @@ export default function RuleRepresentation({
         let statusIcon: JSX.Element | null = null;
         if (isValidValue(value[0]) && icon)
             statusIcon = <RuleStatusIcon status={value[0] as any} />;
-        else console.log(value);
 
         const [, ...v] = value;
 
