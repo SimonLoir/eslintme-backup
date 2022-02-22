@@ -5,6 +5,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import { useState } from 'react';
 import RuleLevelChooser from './RuleLevelChooser';
+import FullScreenOptionsChooser from './FullScreenOptionsChooser';
 export default function RuleGraphicalEditor({
     worker,
     data,
@@ -17,6 +18,7 @@ export default function RuleGraphicalEditor({
     name: string;
 }) {
     const [showMore, setShowMore] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const rule_data = exception ?? data;
     const normalized_data = Rule.normalize(rule_data);
 
@@ -121,6 +123,19 @@ export default function RuleGraphicalEditor({
                     ''
                 )}
                 <RuleRepresentation value={rule_data} icon={false} />
+                {showModal ? (
+                    <FullScreenOptionsChooser
+                        name={name}
+                        quit={() => setShowModal(false)}
+                    />
+                ) : (
+                    <p style={{ color: 'lightgreen' }}>
+                        <button onClick={() => setShowModal(true)}>
+                            Configure
+                        </button>{' '}
+                        #number option(s) available for this rule
+                    </p>
+                )}
             </div>
         </div>
     );
