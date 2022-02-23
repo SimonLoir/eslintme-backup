@@ -78,7 +78,11 @@ export default function RuleGraphicalEditor({
                 style={{ cursor: 'pointer' }}
             >
                 {name}{' '}
-                {opt.length > 0 ? (
+                {exception ? (
+                    <LockIcon
+                        style={{ fontSize: '15px', verticalAlign: 'middle' }}
+                    ></LockIcon>
+                ) : opt.length > 0 ? (
                     <div
                         style={{
                             display: 'inline-grid',
@@ -96,13 +100,6 @@ export default function RuleGraphicalEditor({
                     >
                         {opt_nbr}
                     </div>
-                ) : (
-                    ''
-                )}
-                {exception ? (
-                    <LockIcon
-                        style={{ fontSize: '15px', verticalAlign: 'middle' }}
-                    ></LockIcon>
                 ) : (
                     ''
                 )}
@@ -163,7 +160,9 @@ export default function RuleGraphicalEditor({
                 {showModal ? (
                     <FullScreenOptionsChooser
                         name={name}
+                        options={opt}
                         quit={() => setShowModal(false)}
+                        select={(d) => setException(d)}
                     />
                 ) : (
                     <p style={{ color: 'lightgreen' }}>

@@ -16,18 +16,55 @@ const data = [
 export default function FullScreenOptionsChooser({
     name,
     quit,
+    options,
+    select,
 }: {
     name: string;
     quit: () => void;
+    options: RuleData[];
+    select: (data: any) => void;
 }) {
+    const choose = (d: any) => {
+        select(d);
+        quit();
+    };
     return (
         <>
-            <div className={style.mask}></div>
+            <div className={style.mask} onClick={() => quit()}></div>
             <div className={style.modal}>
                 <div className={style.header}>{name}</div>
                 <div className={style.content}>
                     <h3>From the files</h3>
-                    <div className={style.horizontal}></div>
+                    {options.length == 0 ? (
+                        <p>Could not find other options for this rule.</p>
+                    ) : (
+                        <div className={style.horizontal}>
+                            {options.map(function (opt, i) {
+                                const data: any[] = [2];
+
+                                if (!opt.noValue && opt.options != undefined)
+                                    data.push(opt.options);
+                                if (!opt.noValue && opt.value != undefined)
+                                    data.push(opt.value);
+
+                                return (
+                                    <div className={style.vertical} key={i}>
+                                        <h4>Custom</h4>
+                                        <RuleRepresentation
+                                            value={Rule.normalize(data)}
+                                        />
+                                        <div className={style.bottom}>
+                                            <button
+                                                onClick={() => choose(data)}
+                                            >
+                                                Use this config
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                     <h3>In the models</h3>
                     <div className={style.horizontal}>
                         {data.map(function ({ name: set_name, data }, i) {
@@ -45,7 +82,11 @@ export default function FullScreenOptionsChooser({
                                         value={Rule.normalize(data[name])}
                                     />
                                     <div className={style.bottom}>
-                                        <button>Use this config</button>
+                                        <button
+                                            onClick={() => choose(data[name])}
+                                        >
+                                            Use this config
+                                        </button>
                                     </div>
                                 </div>
                             );
