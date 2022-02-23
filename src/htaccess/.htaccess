@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteRule ^Google$ [model].html [NC,L]
+RewriteRule ^Airbnb$ [model].html [NC,L]
+RewriteRule ^Standard$ [model].html [NC,L]
+RewriteRule ^None$ [model].html [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
