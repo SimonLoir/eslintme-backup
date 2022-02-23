@@ -6,21 +6,37 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import { useState } from 'react';
 import RuleLevelChooser from './RuleLevelChooser';
 import FullScreenOptionsChooser from './FullScreenOptionsChooser';
+import {
+    airbnb,
+    google,
+    recommended_rules,
+    standard,
+} from 'utils/eslint.configs';
 export default function RuleGraphicalEditor({
     worker,
     data,
     exception,
     name,
+    options,
 }: {
     worker: Worker;
     data: any;
     exception: any;
     name: string;
+    options: RuleData[];
 }) {
     const [showMore, setShowMore] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const rule_data = exception ?? data;
+    let rule_data = exception ?? data;
+    if (rule_data == undefined && options.length != 0) rule_data = [0];
     const normalized_data = Rule.normalize(rule_data);
+    const opt = options ?? [];
+    const opt_nbr =
+        opt.length +
+        (airbnb[name] != undefined ? 1 : 0) +
+        (standard[name] != undefined ? 1 : 0) +
+        (recommended_rules[name] != undefined ? 1 : 0) +
+        (google[name] != undefined ? 1 : 0);
 
     const setException = (data: any) => {
         worker.postMessage({
@@ -62,6 +78,27 @@ export default function RuleGraphicalEditor({
                 style={{ cursor: 'pointer' }}
             >
                 {name}{' '}
+                {opt.length > 0 ? (
+                    <div
+                        style={{
+                            display: 'inline-grid',
+                            height: '18px',
+                            width: '18px',
+                            background: 'crimson',
+                            verticalAlign: 'middle',
+                            alignItems: 'center',
+                            justifyItems: 'center',
+                            lineHeight: '15px',
+                            fontSize: '10px',
+                            borderRadius: '50%',
+                            color: 'white',
+                        }}
+                    >
+                        {opt_nbr}
+                    </div>
+                ) : (
+                    ''
+                )}
                 {exception ? (
                     <LockIcon
                         style={{ fontSize: '15px', verticalAlign: 'middle' }}
@@ -133,7 +170,7 @@ export default function RuleGraphicalEditor({
                         <button onClick={() => setShowModal(true)}>
                             Configure
                         </button>{' '}
-                        #number option(s) available for this rule
+                        {opt_nbr} option(s) available for this rule
                     </p>
                 )}
             </div>

@@ -7,6 +7,7 @@ const worker: Worker = self as unknown as Worker;
 const core = new Core();
 const extractor = core.rules;
 let rules: any = {};
+let options: any = {};
 
 worker.addEventListener('message', (e) => {
     const {
@@ -80,13 +81,13 @@ worker.addEventListener('message', (e) => {
         core.addRuleException(content.name, content.data);
         worker.postMessage({
             type: 'export-config',
-            payload: { rules, exceptions: core.exceptions },
+            payload: { rules, exceptions: core.exceptions, options },
         });
     } else if (type == 'remove-exception') {
         core.removeException(content);
         worker.postMessage({
             type: 'export-config',
-            payload: { rules, exceptions: core.exceptions },
+            payload: { rules, exceptions: core.exceptions, options },
         });
     } else {
         console.log('Unknown ', type, e);
@@ -94,9 +95,10 @@ worker.addEventListener('message', (e) => {
 
     if (type == 'order-list-change' || type == 'upload-finished') {
         rules = core.getRules();
+        options = core.getAllOptions();
         worker.postMessage({
             type: 'export-config',
-            payload: { rules, exceptions: core.exceptions },
+            payload: { rules, exceptions: core.exceptions, options },
         });
     }
 });
