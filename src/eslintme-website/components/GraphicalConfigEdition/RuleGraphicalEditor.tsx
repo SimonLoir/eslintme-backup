@@ -111,6 +111,15 @@ export default function RuleGraphicalEditor({
                 />
             </div>
             <div>
+                <span
+                    style={{
+                        color: 'gray',
+                        display: 'inline-block',
+                        marginRight: '5px',
+                    }}
+                >
+                    |
+                </span>
                 <SettingsIcon
                     style={{ verticalAlign: 'middle', cursor: 'pointer' }}
                     onClick={() => setShowMore((e) => !e)}

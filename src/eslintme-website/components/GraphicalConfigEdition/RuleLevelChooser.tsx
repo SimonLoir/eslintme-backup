@@ -14,7 +14,9 @@ export default function RuleLevelChooser({
         <>
             <div
                 className={
-                    style.button + ' ' + (selected == 0 ? style.selected : '')
+                    style.button +
+                    ' ' +
+                    (selected == 0 ? style.selected_disabled : '')
                 }
                 onClick={() => onChange(0)}
             >
@@ -22,7 +24,9 @@ export default function RuleLevelChooser({
             </div>
             <div
                 className={
-                    style.button + ' ' + (selected == 1 ? style.selected : '')
+                    style.button +
+                    ' ' +
+                    (selected == 1 ? style.selected_warning : '')
                 }
                 onClick={() => onChange(1)}
             >
@@ -30,7 +34,9 @@ export default function RuleLevelChooser({
             </div>
             <div
                 className={
-                    style.button + ' ' + (selected == 2 ? style.selected : '')
+                    style.button +
+                    ' ' +
+                    (selected == 2 ? style.selected_error : '')
                 }
                 onClick={() => onChange(2)}
             >

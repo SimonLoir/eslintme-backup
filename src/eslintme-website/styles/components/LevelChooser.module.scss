@@ -14,9 +14,6 @@
     cursor: pointer;
     border: 1px solid rgba(45, 45, 45, 1);
 }
-.selected {
-    background-color: rgba(45, 45, 45, 1);
-}
 
 .none,
 .warning,
@@ -31,4 +28,22 @@
 
 .error {
     color: crimson;
+}
+
+.selected_disabled {
+    background-color: rgb(63, 63, 63);
+}
+
+.selected_warning {
+    background-color: orange;
+    .warning {
+        color: rgb(34, 34, 34);
+    }
+}
+
+.selected_error {
+    background-color: rgb(180, 1, 37);
+    .error {
+        color: white;
+    }
 }
