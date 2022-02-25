@@ -1,0 +1,34 @@
+\section{Structure}
+\subsection{Folder structure}
+The source code is located in the \verb|src| directory. 
+This directory contains 3 subdirectories. 
+The first one contains the code required to create the desktop app. 
+The second one contains the code required to create the website 
+and the last one contains the htaccess file that is required when we upload the files on a web server.
+
+\subsubsection{Desktop app}
+The directory \verb|src/eslintme-native-wrapper| contains 
+the source code for the desktop app. 
+
+\begin{itemize}
+    \item \verb|index.js| is the entry point of the electron app.
+    \item \verb|preload.js| is the bridge between the electron app and the website.
+    \item \verb|package.json| contains meta data related to the app and scripts to run and build the app.
+\end{itemize}
+
+\subsubsection{Website}
+The directory \verb|src/eslintme-website| contains 
+the source code for the website.
+\subsubsection{Htaccess}
+The directory \verb|src/htaccess| contains a file named \verb|.htaccess| that 
+describes how Apache should rewrite some requests. 
+This allows the next.js app to work properly even if the page is reloaded. 
+
+\noindent Note: .htaccess files only work in Apache, 
+you may want to adapt this solution to the server you are using.
+
+\subsubsection{Core}
+The directory \verb|lib/eslintme-core| located in \verb|src/eslintme-website| contains 
+the source code for the "business logic" of the app.
+
+\subsection{Communications inside the software}
