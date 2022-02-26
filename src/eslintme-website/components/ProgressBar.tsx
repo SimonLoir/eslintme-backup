@@ -15,7 +15,7 @@ export default function ProgressBar({
 
     useEffect(() => {
         window.addEventListener('message', ({ data }) => {
-            if (data.type == 'new-file') {
+            if (data.type == 'new-file-processing') {
                 setLoader((l: any) => {
                     l['1'] = true;
                     setCount((count) => count + 1);

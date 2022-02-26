@@ -1,5 +1,12 @@
 
 \section{Events}
+Events are used to transfer information between the different parts of the software.
+The custom events used in this app are always structured in the same way. Events are represented as an object. This object always contains a property "type" that specifies the type of the event. 
 \subsection{Window Events}
+\begin{itemize}
+    \item \texttt{select-dirs} is an event emitted by the file manager. This event tells the Electron wrapper to show a dialog prompting the user to choose a directory.
+    \item \texttt{process-finished} is an event emitted by the file manager. This event tells the progress bar that all the files were processed and therefore the rotating wheel should be hidden.
+    \item \texttt{new-file-processing} is an event emitted by the file manager. This event tells the progress bar that a new file was added to the queue and the progress bar should indicate that the app is processing the file.
+\end{itemize}
 \subsection{Desktop App Events}
 \subsection{Worker Events}

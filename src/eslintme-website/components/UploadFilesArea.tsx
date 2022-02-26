@@ -65,7 +65,7 @@ export default function UploadFilesArea({
         if (filesRef.current.filter((f) => f.name == name).length != 0)
             return console.log('Duplicate file ' + name);
         setFiles((files) => [...files, { name, processed: false, ratio: 0 }]);
-        window.postMessage({ type: 'new-file' });
+        window.postMessage({ type: 'new-file-processing' });
         worker.postMessage({ type: 'new-file', name, content });
     };
 
