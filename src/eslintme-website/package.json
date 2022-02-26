@@ -12,7 +12,8 @@
         "licences": "license-report --output=json > public/licenses.json; npm run licences-core; npm run licences-native",
         "licences-core": "license-report --package lib/eslintme-core/package.json --output=json > public/licenses-core.json",
         "licences-native": "license-report --package ../eslintme-native-wrapper/package.json --output=json > public/licenses-native.json",
-        "export-to-electron": "next build; next export; rm -rf ../eslintme-native-wrapper/files; mv out/ ../eslintme-native-wrapper/files"
+        "export-to-electron": "npm run export; rm -rf ../eslintme-native-wrapper/files; mv out/ ../eslintme-native-wrapper/files",
+        "export": "node rules_downloader.js; npm run licences; npm run build; npm run static;"
     },
     "dependencies": {
         "@emotion/react": "^11.7.1",

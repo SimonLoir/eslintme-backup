@@ -29,6 +29,12 @@ you may want to adapt this solution to the server you are using.
 
 \subsubsection{Core}
 The directory \verb|lib/eslintme-core| located in \verb|src/eslintme-website| contains 
-the source code for the "business logic" of the app.
+the source code for the "business logic" of the app. This would allow an other developer to create a different GUI but keep the logic behind ESLintME
 
 \subsection{Communications inside the software}
+The different parts of the software communicate with each other thanks to special events that are described in the "Events" section.
+
+\noindent The components can interact with each other using the \texttt{\href{https://developer.mozilla.org/fr/docs/Web/API/Window/postMessage}{postMessage}} method.
+
+\noindent The worker and the components that use it can communicate though the mechanisms provided by the 
+\texttt{\href{https://developer.mozilla.org/fr/docs/Web/API/Web_Workers_API/Using_web_workers}{Web Workers API}}.

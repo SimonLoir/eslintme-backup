@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const serve = require('electron-serve');
 
-const loadURL = serve({ directory: 'files' });
+const loadURL = serve({ directory: 'files', isCorsEnabled: false });
 
 /**
  * Creates a new browser window for the app

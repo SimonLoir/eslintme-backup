@@ -2,6 +2,7 @@
  * This files makes the bridge between electron's APIs and classic web APIs
  */
 const { contextBridge, ipcRenderer } = require('electron');
+console.log('preload');
 
 // This allows the renderer that it is running in a "native" environnement
 contextBridge.exposeInMainWorld('native', true);
@@ -13,13 +14,13 @@ process.once('loaded', () => {
     });
 });
 
-ipcRenderer.on('file', (ev, file) => {
-    console.assert(file, 'Failed to get a proper file');
+ipcRenderer.on('file', (ev, f) => {
+    console.assert(f, 'Failed to get a proper file');
     // Creating a blob from the file's content
-    const blob = new Blob([file.content]);
+    const blob = new Blob([f.content]);
     // Creating a virtual file from the blob
-    const file = new File([blob], file.name, {
-        lastModified: file.lastModified,
+    const file = new File([blob], f.name, {
+        lastModified: f.lastModified,
     });
     // The file is then sent to the website
     window.postMessage({ type: 'new-file', file, path: file.path });
