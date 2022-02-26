@@ -5,6 +5,7 @@ export default function GraphicalConfigEditor({ worker }: { worker: Worker }) {
     const [rules, setRules] = useState<any>({});
     const [options, setOptions] = useState<any>({});
     const [exceptions, setExceptions] = useState<any>({});
+    const keys = Object.keys({ ...rules, ...exceptions }).sort();
 
     useEffect(() => {
         worker.addEventListener('message', ({ data }) => {
@@ -20,7 +21,7 @@ export default function GraphicalConfigEditor({ worker }: { worker: Worker }) {
 
     return (
         <>
-            {Object.keys({ ...rules, ...exceptions }).map((e) => (
+            {keys.map((e) => (
                 <RuleGraphicalEditor
                     key={e}
                     worker={worker}
