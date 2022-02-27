@@ -10,6 +10,7 @@ import {
     airbnb,
     google,
     recommended_rules,
+    rules_meta_data,
     standard,
 } from 'utils/eslint.configs';
 export default function RuleGraphicalEditor({
@@ -161,6 +162,14 @@ export default function RuleGraphicalEditor({
                                 }}
                             />
                         </span>
+                    </p>
+                ) : (
+                    ''
+                )}
+                {rules_meta_data[name] ? (
+                    <p>
+                        [{rules_meta_data[name].category}]{' '}
+                        {rules_meta_data[name].description}
                     </p>
                 ) : (
                     ''

@@ -14,6 +14,22 @@ import * as eslint_recommended from 'eslint/conf/eslint-recommended';
 //@ts-ignore
 import * as eslint_all from 'eslint/conf/eslint-all';
 
+//@ts-ignore
+import * as rules_data from 'eslint/lib/rules';
+
+export let rules_meta_data: {
+    [key: string]: {
+        category: string;
+        description: string;
+        url: string;
+        recommended: boolean;
+    };
+} = {};
+
+rules_data.forEach((data, key) => {
+    rules_meta_data[key] = data.meta.docs;
+});
+
 export const airbnb = {
     ...airbnb_best_practices.rules,
     ...airbnb_es6.rules,

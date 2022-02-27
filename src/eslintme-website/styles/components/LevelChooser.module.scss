@@ -20,18 +20,14 @@
 .error {
     font-size: 18px;
     text-align: center;
-}
-
-.warning {
-    color: orange;
-}
-
-.error {
-    color: crimson;
+    color: rgb(180, 180, 180);
 }
 
 .selected_disabled {
     background-color: rgb(63, 63, 63);
+    .none {
+        color: white;
+    }
 }
 
 .selected_warning {
