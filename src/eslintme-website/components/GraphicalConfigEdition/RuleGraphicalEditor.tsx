@@ -147,7 +147,7 @@ export default function RuleGraphicalEditor({
                             onClick={() => {
                                 if (
                                     confirm(
-                                        'If you modified this rule, you will lose the changes you made.'
+                                        'If you modified this rule, you will lose the changes you made. If this rule was not in a model or in the rules found, it will be removed.'
                                     )
                                 )
                                     removeException();
