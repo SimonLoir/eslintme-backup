@@ -23,11 +23,13 @@ export let rules_meta_data: {
         description: string;
         url: string;
         recommended: boolean;
+        schema: any;
     };
 } = {};
 
 rules_data.forEach((data, key) => {
     rules_meta_data[key] = data.meta.docs;
+    rules_meta_data[key].schema = data.meta.schema;
 });
 
 export const airbnb = {
