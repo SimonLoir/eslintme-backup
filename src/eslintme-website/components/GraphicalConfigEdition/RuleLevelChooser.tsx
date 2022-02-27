@@ -21,6 +21,7 @@ export default function RuleLevelChooser({
                 onClick={() => onChange(0)}
             >
                 <Clear className={style.none} />
+                <div className={style.tooltip}>Disabled</div>
             </div>
             <div
                 className={
@@ -31,6 +32,7 @@ export default function RuleLevelChooser({
                 onClick={() => onChange(1)}
             >
                 <WarningIcon className={style.warning} />
+                <div className={style.tooltip}>Warning</div>
             </div>
             <div
                 className={
@@ -41,6 +43,7 @@ export default function RuleLevelChooser({
                 onClick={() => onChange(2)}
             >
                 <ReportGmailerrorredIcon className={style.error} />
+                <div className={style.tooltip}>Error</div>
             </div>
         </>
     );
