@@ -1,0 +1,10 @@
+\section{Interfaces and types}
+A few interfaces were added to the source code. The package used to parse javascript files, espree, does not come with type annotations whereas esprima does. The file \texttt{typings.d.ts} located in the \texttt{core} codebase fixes this issue. It provides type annotations for the features used in this program. The file might need some adjustments if newer versions of espree come out or if other features of espree are required in the app.
+
+\noindent Other interfaces and types are used to represent data structures : 
+
+\begin{itemize}
+    \item \texttt{FileStoreFile} represents a file that is treated by the system.
+    \item \texttt{FileStore} is a list of \texttt{FileStoreFile} 
+    \item \texttt{*.worker.ts} is used to represent a web worker. This worker can therefore be bundled by webpack.
+\end{itemize}
