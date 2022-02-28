@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import AddRuleModal from './AddRuleModal';
 import RuleGraphicalEditor from './RuleGraphicalEditor';
 
 export default function GraphicalConfigEditor({ worker }: { worker: Worker }) {
     const [rules, setRules] = useState<any>({});
     const [options, setOptions] = useState<any>({});
     const [exceptions, setExceptions] = useState<any>({});
+    const [addRule, setAddRule] = useState(false);
+
     const keys = Object.keys({ ...rules, ...exceptions }).sort();
 
     useEffect(() => {
@@ -21,6 +24,18 @@ export default function GraphicalConfigEditor({ worker }: { worker: Worker }) {
 
     return (
         <>
+            {addRule ? (
+                <AddRuleModal
+                    current={keys}
+                    hide={() => setAddRule(false)}
+                    worker={worker}
+                />
+            ) : (
+                ''
+            )}
+            <p>
+                <button onClick={() => setAddRule(true)}>Add a new rule</button>
+            </p>
             {keys.map((e) => (
                 <RuleGraphicalEditor
                     key={e}

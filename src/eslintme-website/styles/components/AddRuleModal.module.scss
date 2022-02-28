@@ -1,0 +1,85 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(34, 34, 34);
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.45);
+    z-index: 100;
+    width: 350px;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 99;
+}
+
+.mainInput {
+    position: relative;
+    background-color: rgb(45, 45, 45);
+    border: 1px solid rgb(30, 30, 30);
+    line-height: 45px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    font-size: 20px;
+}
+
+.bottom {
+    margin-top: 15px;
+    line-height: 35px;
+    float: right;
+    button {
+        margin-top: 0;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+    span {
+        cursor: pointer;
+        font-weight: 600;
+    }
+}
+
+.list {
+    overflow: auto;
+    max-height: 200px;
+    p {
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 1.6;
+        cursor: pointer;
+    }
+}
+
+.error,
+.warning {
+    color: rgb(212, 2, 44);
+    font-weight: 600;
+    margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: justify;
+}
+
+.warning {
+    color: orange;
+}
+
+.option {
+    background-color: rgb(45, 45, 45);
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}

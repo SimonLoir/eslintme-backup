@@ -4,6 +4,7 @@ import Rule from '@core/Rule';
 import style from '@style/FullScreenModal.module.scss';
 import {
     airbnb,
+    eslint_rules,
     google,
     recommended_rules,
     standard,
@@ -113,7 +114,12 @@ export default function FullScreenOptionsChooser({
                         }}
                     >
                         {error ? (
-                            <p>An error occurred</p>
+                            <p>
+                                An error occurred.{' '}
+                                {eslint_rules[name] == undefined
+                                    ? 'This rule is not a valid eslint rule (it may be deprecated). We could not find the documentation for it.'
+                                    : ''}
+                            </p>
                         ) : description ? (
                             <ReactMarkdown>{description}</ReactMarkdown>
                         ) : (

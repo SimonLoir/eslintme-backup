@@ -11,7 +11,10 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
      * @param opt The new order list
      */
     const notifyOptionsChange = (opt: OOListItem[]) => {
-        worker.postMessage({ type: 'order-list-change', content: opt });
+        worker.postMessage({
+            type: 'order-list-change',
+            content: opt,
+        });
         return opt;
     };
 
@@ -47,8 +50,8 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
         setOptions(
             notifyOptionsChange([
                 {
-                    name: 'Rules found',
-                    id: 'found',
+                    name: 'Rules recommended',
+                    id: 'recommended',
                     enabled: true,
                     force: true,
                 },
@@ -59,8 +62,8 @@ export default function OverrideOrderList({ worker }: { worker: Worker }) {
                     force: true,
                 },
                 {
-                    name: 'Rules recommended',
-                    id: 'recommended',
+                    name: 'Rules found',
+                    id: 'found',
                     enabled: true,
                     force: true,
                 },

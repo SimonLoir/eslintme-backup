@@ -39,21 +39,32 @@ export default function RuleGraphicalEditor({
         (recommended_rules[name] != undefined ? 1 : 0) +
         (google[name] != undefined ? 1 : 0);
 
+    /**
+     * Sets a new exception for the current rule (props.name)
+     * @param data The new value of the rule.
+     */
     const setException = (data: any) => {
+        console.assert(data != undefined, 'Rule data was not provided');
         worker.postMessage({
             type: 'set-exception',
             content: { name, data },
         });
     };
 
+    /**
+     * Removes the exception on the current rule (props.name).
+     */
     const removeException = () => {
-        console.log(name);
         worker.postMessage({
             type: 'remove-exception',
             content: name,
         });
     };
 
+    /**
+     * Changes the level of a rule
+     * @param newLevel The new level for this rule
+     */
     const changeLevel = (newLevel: 0 | 1 | 2) => {
         if (Array.isArray(rule_data) && rule_data.length > 0) {
             const array = [...rule_data];
@@ -75,7 +86,7 @@ export default function RuleGraphicalEditor({
             }}
         >
             <span
-                onClick={() => setShowMore((e) => !e)}
+                onClick={/*toggles show more*/ () => setShowMore((e) => !e)}
                 style={{ cursor: 'pointer' }}
             >
                 {name}{' '}
