@@ -192,6 +192,7 @@ export default function RuleGraphicalEditor({
                         options={opt}
                         quit={() => setShowModal(false)}
                         select={(d) => setException(d)}
+                        current={rule_data}
                     />
                 ) : (
                     <p style={{ color: 'lightgreen' }}>

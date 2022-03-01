@@ -12,6 +12,8 @@ import {
 import useSWR from 'swr';
 import fetcher from 'utils/fetcher';
 import Loader from '@components/Loader';
+import CustomConfig from './CustomConfig';
+
 const data = [
     { name: 'Airbnb', data: airbnb },
     { name: 'Google', data: google },
@@ -23,11 +25,13 @@ export default function FullScreenOptionsChooser({
     quit,
     options,
     select,
+    current,
 }: {
     name: string;
     quit: () => void;
     options: RuleData[];
     select: (data: any) => void;
+    current: any;
 }) {
     const { data: description, error } = useSWR(`rules/${name}.md`, fetcher);
     const choose = (d: any) => {
@@ -41,6 +45,12 @@ export default function FullScreenOptionsChooser({
                 <div className={style.header}>{name}</div>
                 <div className={style.content}>
                     <div>
+                        <h3>Custom config</h3>
+                        <CustomConfig
+                            current_config={current}
+                            name={name}
+                            validate={choose}
+                        />
                         <h3>From the files</h3>
                         {options.length == 0 ? (
                             <p>Could not find other options for this rule.</p>
