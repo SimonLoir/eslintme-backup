@@ -12,8 +12,8 @@ function testJSON(data: string) {
     }
 }
 
-function testValidity(value: string, schema: any[] = []) {
-    value = Rule.normalize(value);
+function testValidity(value: any, schema: any[] = []) {
+    value = !Array.isArray(value) ? Rule.normalize(value) : value;
     schema = [{ type: 'number' }, ...schema];
     console.log(value, schema);
     for (let index = 0; index < value.length; index++) {
@@ -46,7 +46,11 @@ export default function CustomConfig({
     const valid_schema =
         validityErrors.length == 0
             ? ''
-            : validityErrors.map((e, i) => <p key={i}>{e.toString()}</p>);
+            : validityErrors.map((e, i) => (
+                  <p key={i} style={{ color: 'crimson' }}>
+                      {e.toString()}
+                  </p>
+              ));
 
     const schema_found =
         schema == undefined ? (
