@@ -20,6 +20,8 @@ async function newWindow() {
         },
     });
 
+    main.setMenu(null);
+
     // Serves the html files
     await loadURL(main);
 

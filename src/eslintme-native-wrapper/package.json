@@ -18,7 +18,7 @@
         "electron-serve": "^1.1.0"
     },
     "build": {
-        "appId": "be.simonloir.${name}",
+        "appId": "be.simonloir.eslintme",
         "productName": "ESLintME",
         "mac": {
             "category": "public.app-category.developer-tools",
