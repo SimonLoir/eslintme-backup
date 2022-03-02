@@ -89,6 +89,8 @@ worker.addEventListener('message', (e) => {
             type: 'export-config',
             payload: { rules, exceptions: core.exceptions, options },
         });
+    } else if (type == 'set-env') {
+        core.env = content;
     } else {
         console.log('Unknown ', type, e);
     }

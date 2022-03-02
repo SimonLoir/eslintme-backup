@@ -17,6 +17,11 @@ import * as eslint_all from 'eslint/conf/eslint-all';
 //@ts-ignore
 import * as rules_data from 'eslint/lib/rules';
 
+//@ts-ignore
+import * as env from '@eslint/eslintrc/conf/environments';
+
+export const eslint_environnements = [...env.keys()];
+
 export let rules_meta_data: {
     [key: string]: {
         category: string;

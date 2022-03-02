@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import EnvironnementChooser from './EnvironnementChooser';
 
 export default function ExportArea({
     worker,
@@ -44,11 +45,17 @@ export default function ExportArea({
     return (
         <div
             style={{
-                display: display ? 'block' : 'none',
+                display: display ? 'grid' : 'none',
                 overflow: 'auto',
                 height: '100%',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '25px',
             }}
         >
+            <div>
+                <h2>Environnement</h2>
+                <EnvironnementChooser worker={worker} />
+            </div>
             <div>
                 <h2>Export</h2>
                 <p>
