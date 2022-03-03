@@ -20,7 +20,7 @@ export default function EnvironnementChooser({ worker }: { worker: Worker }) {
     return (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
             {eslint_environnements.map((e, i) => (
-                <p style={{ textAlign: 'left' }}>
+                <p style={{ textAlign: 'left' }} key={i}>
                     <label style={{ cursor: 'pointer' }}>
                         <input
                             type='checkbox'
