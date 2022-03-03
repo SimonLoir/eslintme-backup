@@ -4,6 +4,12 @@ interface ModelProps {
     name: string;
     features: string[];
 }
+
+/**
+ * Component representing a model on the home page.
+ * @prop name The name of the model.
+ * @prop features The list of features of the model.
+ */
 export default function Model({ name, features }: ModelProps) {
     return (
         <Link href={'/' + name} passHref>

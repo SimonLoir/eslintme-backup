@@ -1,6 +1,13 @@
 import style from '@style/ProgressBar.module.scss';
 import { useEffect, useState } from 'react';
 import ProgressBarStep from './ProgressBarStep';
+
+/**
+ * Component representing progress bar located on top of the app.
+ * @prop steps A list of names for the steps.
+ * @prop current The index of the current step.
+ * @prop select The callback used to select a step.
+ */
 export default function ProgressBar({
     steps,
     current,

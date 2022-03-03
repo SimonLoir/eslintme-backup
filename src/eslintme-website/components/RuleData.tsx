@@ -1,3 +1,7 @@
+/**
+ * Component representing the data of a rule in a graphical manner.
+ * @prop value The value of the room.
+ */
 export default function RuleData({ value }: { value: any }) {
     if (Array.isArray(value)) {
         if (value.length == 0) return <></>;

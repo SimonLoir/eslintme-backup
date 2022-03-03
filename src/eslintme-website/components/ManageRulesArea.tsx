@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import GraphicalConfigEditor from './GraphicalConfigEdition/GraphicalConfigEditor';
 import RuleRepresentation from './RuleGraphicalRepresentation';
 
+/**
+ * Component representing the area were the users can manage the rules of their config.
+ * @prop worker The eslintme web worker.
+ * @prop display Whether or not this area should be displayed on the screen.
+ */
 export default function ManageRulesArea({
     worker,
     display,

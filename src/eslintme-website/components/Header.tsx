@@ -1,5 +1,9 @@
 import style from '@style/Header.module.scss';
 import Link from 'next/link';
+
+/**
+ * Component representing the header of the app.
+ */
 export default function Header() {
     return (
         <header className={style.header}>

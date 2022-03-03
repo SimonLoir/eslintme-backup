@@ -1,6 +1,11 @@
 import RuleData from './RuleData';
 import RuleStatusIcon from './RuleStatusIcon';
 
+/**
+ * Tells whether a rule is valid or not.
+ * @param value The value of the rule
+ * @returns true if the rule is valid, false otherwise.
+ */
 function isValidValue(value: number | string) {
     return (
         typeof value == 'number' ||
@@ -9,6 +14,11 @@ function isValidValue(value: number | string) {
     );
 }
 
+/**
+ * Component representing a rule in a graphical manner.
+ * @prop value The value of the rule.
+ * @prop icon Whether or not an icon should be displayed.
+ */
 export default function RuleRepresentation({
     value,
     icon = true,

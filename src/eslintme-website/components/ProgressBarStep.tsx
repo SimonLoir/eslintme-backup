@@ -1,5 +1,14 @@
 import style from '@style/ProgressBar.module.scss';
 import SettingsIcon from '@mui/icons-material/Settings';
+
+/**
+ * Component representing a step in the progress bar.
+ * @prop id The ID of the step.
+ * @prop name The name of the step.
+ * @prop selected Whether or not the step is selected.
+ * @prop select Callback used to select this step.
+ * @prop loading Whether this step is pending.
+ */
 export default function ProgressBarStep({
     id,
     name,
