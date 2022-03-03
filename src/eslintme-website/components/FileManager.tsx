@@ -8,6 +8,10 @@ interface FileManagerProps {
     onNewFile: (hash: string, content: File) => void;
 }
 
+/**
+ * Components that lets the user upload files.
+ * @prop onNewFile Callback called when a new file is uploaded.
+ */
 export default function FileManager({ onNewFile }: FileManagerProps) {
     const [onNativeDevice, setOnNativeDevice] = useState(false);
     const onDrop = useCallback(
@@ -30,9 +34,11 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
         [onNewFile]
     );
 
+    /**
+     * Sends a message to show a Directory Selection Dialog.
+     */
     const onOpenFolder = useCallback(() => {
         window.postMessage({ type: 'select-dirs' });
-        console.log('dirs');
     }, []);
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -40,8 +46,14 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
     });
 
     useEffect(() => {
+        /**
+         * Adds import capabilities from a directory thanks to electron.
+         */
         if ('native' in window) {
+            // Tells the component that it is rendered in a "native" app.
             setOnNativeDevice(true);
+
+            // Link between electron and the app
             window.addEventListener('message', ({ data }) => {
                 if (data.type == 'new-file') {
                     const { file, path } = data;
@@ -63,6 +75,7 @@ export default function FileManager({ onNewFile }: FileManagerProps) {
     return (
         <>
             {onNativeDevice ? (
+                /* This is only displayed if the app runs in an electron wrapper. */
                 <>
                     <p>
                         <button onClick={onOpenFolder}>Open from folder</button>

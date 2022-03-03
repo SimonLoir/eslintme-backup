@@ -8,6 +8,9 @@ import {
 import style from '@style/ComparePage.module.scss';
 import RuleRepresentation from '@components/RuleGraphicalRepresentation';
 
+/**
+ * Component representing a page to compare models.
+ */
 export default function ComparePage() {
     return (
         <div className={style.wrapper}>

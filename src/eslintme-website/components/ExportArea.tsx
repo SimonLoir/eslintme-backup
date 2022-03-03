@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import EnvironnementChooser from './EnvironnementChooser';
 
+/**
+ * Component representing the area were the users can export their config.
+ * @prop worker The eslintme web worker.
+ * @prop display Whether or not this area should be displayed on the screen.
+ */
 export default function ExportArea({
     worker,
     display,

@@ -1,7 +1,10 @@
 import licences from '../public/licenses.json';
 import licences_native from '../public/licenses-native.json';
 import licences_core from '../public/licenses-core.json';
-export default function LicencePage() {
+/**
+ * Component representing the about page
+ */
+export default function AboutPage() {
     return (
         <div style={{ overflow: 'auto', height: '100%' }}>
             <h2>Legal information</h2>

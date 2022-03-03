@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { eslint_environnements } from 'utils/eslint.configs';
 
+/**
+ * Component that lets the user choose the desired environnement for his config.
+ * @prop worker The eslintme web worker.
+ */
 export default function EnvironnementChooser({ worker }: { worker: Worker }) {
     const [env, setEnv] = useState<{ [key: string]: boolean }>({});
 

@@ -6,6 +6,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useState } from 'react';
 
 const steps = ['Upload Files', 'Manage Rules', 'Export'];
+
+/**
+ * Component representing the model page
+ */
 export default function ModelPage() {
     const [step, setStep] = useState(0);
     return (

@@ -2,6 +2,9 @@ import Model from '@components/Model';
 import type { NextPage } from 'next';
 import style from '@style/Home.module.scss';
 
+/**
+ * Component representing the home page of the website.
+ */
 const Home: NextPage = () => {
     return (
         <>
