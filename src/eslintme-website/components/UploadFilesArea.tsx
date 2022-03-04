@@ -148,10 +148,9 @@ export default function UploadFilesArea({
                 ) : (
                     <div>
                         <p>
-                            This web app processes your files locally. None of
-                            the files you provide to this app will be sent
-                            anywhere. If you downloaded the app, you can also
-                            use ESLintME without an internet connection !
+                            This web app processes your files locally. If you
+                            downloaded the app, you can also use ESLintME
+                            without an internet connection !
                         </p>
                     </div>
                 )}
@@ -160,9 +159,10 @@ export default function UploadFilesArea({
             <div>
                 <h2>Rules order</h2>
                 <p>
-                    You can enable and disable some sets of rules. You can also
-                    choose whether or not those rules should override the rules
-                    below.
+                    You can enable and disable some sets of rules. The first set
+                    enabled will serve as a base. The next sets enabled will
+                    either override the rules (if "force" is enables) or
+                    complete the previous sets with rules that are not used yet.
                 </p>
                 <OverrideOrderList worker={worker} />
             </div>

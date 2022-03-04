@@ -131,7 +131,10 @@ export default function FullScreenOptionsChooser({
                                     : ''}
                             </p>
                         ) : description ? (
-                            <ReactMarkdown>{description}</ReactMarkdown>
+                            <ReactMarkdown>
+                                {description +
+                                    '\nCopyright OpenJS Foundation and other contributors'}
+                            </ReactMarkdown>
                         ) : (
                             <Loader text='loading' />
                         )}

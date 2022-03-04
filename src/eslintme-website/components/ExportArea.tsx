@@ -53,17 +53,17 @@ export default function ExportArea({
         <div
             style={{
                 display: display ? 'grid' : 'none',
-                overflow: 'auto',
+                overflow: 'hidden',
                 height: '100%',
                 gridTemplateColumns: '1fr 1fr',
                 gap: '25px',
             }}
         >
-            <div>
+            <div style={{ overflow: 'auto' }}>
                 <h2>Environnement</h2>
                 <EnvironnementChooser worker={worker} />
             </div>
-            <div>
+            <div style={{ overflow: 'auto' }}>
                 <h2>Export</h2>
                 <p>
                     You can now export your ESLint config file in the desired

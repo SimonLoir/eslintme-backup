@@ -62,7 +62,15 @@ export default function ManageRulesArea({
                             .map((e, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td>{e}</td>
+                                        <td>
+                                            <a
+                                                href={`https://eslint.org/docs/rules/${e}`}
+                                                target='_blank'
+                                                rel='noreferrer'
+                                            >
+                                                {e}
+                                            </a>
+                                        </td>
                                         <td>
                                             <RuleRepresentation
                                                 value={rules[e]}
