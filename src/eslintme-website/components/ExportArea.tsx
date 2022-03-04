@@ -20,7 +20,6 @@ export default function ExportArea({
         worker.addEventListener('message', ({ data: { type, blob } }) => {
             switch (type) {
                 case 'download-ready':
-                    console.log('New download ready');
                     /**
                      * The worker may indicate that a config file has been generated
                      * The renderer makes it downloadable

@@ -15,13 +15,11 @@ function testJSON(data: string) {
 function testValidity(value: any, schema: any[] = []) {
     value = !Array.isArray(value) ? Rule.normalize(value) : value;
     schema = [{ type: 'number' }, ...schema];
-    console.log(value, schema);
     for (let index = 0; index < value.length; index++) {
         const e = value[index];
         const s = schema[index];
         if (s == undefined) return [];
         const v = validate(e, s);
-        console.log(v);
         if (!v.valid) return v.errors;
     }
     return [];

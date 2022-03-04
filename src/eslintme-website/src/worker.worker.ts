@@ -1,5 +1,4 @@
 import Core from '@core/Core';
-import { eslint_rules } from 'utils/eslint.configs';
 
 // @see https://medium.com/lagierandlagier/nextjs-webassembly-and-web-workers-a5f7c19d4fd0
 
@@ -92,7 +91,7 @@ worker.addEventListener('message', (e) => {
     } else if (type == 'set-env') {
         core.env = content;
     } else {
-        console.log('Unknown ', type, e);
+        console.warn('Unknown ', type, e);
     }
 
     if (type == 'order-list-change' || type == 'upload-finished') {
@@ -104,5 +103,3 @@ worker.addEventListener('message', (e) => {
         });
     }
 });
-
-console.log(eslint_rules);

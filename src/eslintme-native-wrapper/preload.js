@@ -2,7 +2,6 @@
  * This files makes the bridge between electron's APIs and classic web APIs
  */
 const { contextBridge, ipcRenderer } = require('electron');
-console.log('preload');
 
 // This allows the renderer that it is running in a "native" environnement
 contextBridge.exposeInMainWorld('native', true);

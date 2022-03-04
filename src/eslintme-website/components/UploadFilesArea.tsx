@@ -54,7 +54,7 @@ export default function UploadFilesArea({
                                     : { ...file, failed: true }
                             )
                         );
-                        console.log(error);
+                        console.error(error);
                         break;
 
                     case 'progress':
