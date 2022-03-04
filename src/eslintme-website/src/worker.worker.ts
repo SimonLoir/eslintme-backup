@@ -10,7 +10,7 @@ let options: any = {};
 
 worker.addEventListener('message', (e) => {
     const {
-        data: { name, content, type, format, call },
+        data: { name, content, type, format },
     } = e;
     if (type == 'new-file') {
         /**
