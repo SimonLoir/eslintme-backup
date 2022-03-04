@@ -3,6 +3,11 @@ import FileManager from './FileManager';
 import Loader from './Loader';
 import OverrideOrderList from './OverrideOrderList/OverrideOrderList';
 
+/**
+ * Component representing the area were the users can upload their files.
+ * @prop worker The eslintme web worker.
+ * @prop display Whether or not this area should be displayed on the screen.
+ */
 export default function UploadFilesArea({
     worker,
     display,
@@ -10,6 +15,9 @@ export default function UploadFilesArea({
     worker: Worker;
     display: boolean;
 }) {
+    console.assert(worker != undefined, 'No worker provided');
+    console.assert(display != undefined, 'Undefined display state');
+
     const [filesInQueue, setFiles] = useState<FileStore>([]);
     const filesRef = useRef(filesInQueue);
 

@@ -26,6 +26,7 @@ export default function RuleRepresentation({
     value: number | string | any[];
     icon?: boolean;
 }) {
+    console.assert(icon != undefined, 'icon should be a boolean.');
     if (!value) return <></>;
     if (typeof value == 'object') {
         let statusIcon: JSX.Element | null = null;

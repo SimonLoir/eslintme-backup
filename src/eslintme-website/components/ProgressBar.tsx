@@ -17,6 +17,13 @@ export default function ProgressBar({
     current: number;
     select: (e: number) => void;
 }) {
+    console.assert(
+        steps != undefined && steps.length != 0,
+        'No steps provided'
+    );
+    console.assert(current != undefined, 'No current provided');
+    console.assert(select != undefined, 'No select handler provided');
+
     const [loader, setLoader] = useState<any>({});
     const [count, setCount] = useState(0);
 
@@ -61,7 +68,13 @@ export default function ProgressBar({
     );
 }
 
+/**
+ * Generates css for a grid based on the number of columns.
+ * @param count The number of columns.
+ * @returns css properties to create a grid.
+ */
 function getGridStyle(count: number): React.CSSProperties {
+    console.assert(count != undefined && count > 0, 'Invalid count');
     return {
         display: 'grid',
         gridTemplateColumns: 'repeat(' + count + ', 1fr)',
@@ -70,7 +83,13 @@ function getGridStyle(count: number): React.CSSProperties {
     };
 }
 
+/**
+ * Gets the width of the progress bar.
+ * @param count The number of steps on the progress bar.
+ * @returns The width the progress bar should have.
+ */
 function getBarWidth(count: number): string {
+    console.assert(count != undefined && count > 0, 'Invalid count');
     const percent = 100 - 100 / count;
     return `calc(${percent}% - 280px)`;
 }

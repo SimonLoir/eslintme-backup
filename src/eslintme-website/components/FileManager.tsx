@@ -13,6 +13,10 @@ interface FileManagerProps {
  * @prop onNewFile Callback called when a new file is uploaded.
  */
 export default function FileManager({ onNewFile }: FileManagerProps) {
+    console.assert(
+        onNewFile != undefined,
+        'No handler provided for new files.'
+    );
     const [onNativeDevice, setOnNativeDevice] = useState(false);
     const onDrop = useCallback(
         (acceptedFiles) => {

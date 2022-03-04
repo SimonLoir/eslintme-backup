@@ -22,6 +22,11 @@ export default function ProgressBarStep({
     select: (e: number) => void;
     loading: boolean;
 }) {
+    console.assert(id >= 0, 'Step ID must be greater than 0');
+    console.assert(name != undefined, 'Name must be provided');
+    console.assert(selected != undefined, 'Selected must be provided');
+    console.assert(select != undefined, 'Select handler must be provided');
+
     return (
         <div className={style.step} onClick={() => select(id)}>
             <div

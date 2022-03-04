@@ -11,6 +11,11 @@ interface ModelProps {
  * @prop features The list of features of the model.
  */
 export default function Model({ name, features }: ModelProps) {
+    console.assert(name != undefined, 'No model name provided');
+    console.assert(
+        features != undefined && features.length > 0,
+        'No feature provided'
+    );
     return (
         <Link href={'/' + name} passHref>
             <div className={style.model}>

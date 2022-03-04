@@ -12,6 +12,13 @@ import Loader from './Loader';
 import ManageRulesArea from './ManageRulesArea';
 import UploadFilesArea from './UploadFilesArea';
 
+/**
+ * Component representing the working area.
+ * @prop state The state of the working area
+ *     - 0 : File Upload Area
+ *     - 1 : Rules Management Area
+ *     - 2 : Export Area
+ */
 export default function WorkingArea({ state }: { state: number }) {
     const router = useRouter();
     const worker = useRef<Worker>();

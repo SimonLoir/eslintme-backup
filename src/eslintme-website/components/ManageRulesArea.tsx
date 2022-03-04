@@ -14,6 +14,8 @@ export default function ManageRulesArea({
     worker: Worker;
     display: boolean;
 }) {
+    console.assert(worker != undefined, 'No worker provided');
+    console.assert(display != undefined, 'Undefined display state');
     const [rules, setRules] = useState<any>({});
 
     useEffect(() => {

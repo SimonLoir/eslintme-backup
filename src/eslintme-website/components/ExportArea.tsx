@@ -13,6 +13,9 @@ export default function ExportArea({
     worker: Worker;
     display: boolean;
 }) {
+    console.assert(worker != undefined, 'No worker provided');
+    console.assert(display != undefined, 'Undefined display state');
+
     useEffect(() => {
         worker.addEventListener('message', ({ data: { type, blob } }) => {
             switch (type) {

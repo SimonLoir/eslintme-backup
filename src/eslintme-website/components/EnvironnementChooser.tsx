@@ -6,6 +6,7 @@ import { eslint_environnements } from 'utils/eslint.configs';
  * @prop worker The eslintme web worker.
  */
 export default function EnvironnementChooser({ worker }: { worker: Worker }) {
+    console.assert(worker != undefined, 'No worker provided');
     const [env, setEnv] = useState<{ [key: string]: boolean }>({});
 
     const setEnvironnement = (e: any) => {
