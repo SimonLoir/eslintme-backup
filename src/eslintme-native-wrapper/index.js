@@ -18,6 +18,7 @@ async function newWindow() {
             preload: path.join(__dirname, 'preload.js'),
             sandbox: true,
         },
+        title: 'ESLintME Desktop Version',
     });
 
     main.setMenu(null);
