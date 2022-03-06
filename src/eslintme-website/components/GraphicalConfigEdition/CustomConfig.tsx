@@ -14,6 +14,7 @@ function testJSON(data: string) {
 
 function testValidity(value: any, schema: any[] = []) {
     value = !Array.isArray(value) ? Rule.normalize(value) : value;
+    if (!Array.isArray(schema)) return [];
     schema = [{ type: 'number' }, ...schema];
     for (let index = 0; index < value.length; index++) {
         const e = value[index];
